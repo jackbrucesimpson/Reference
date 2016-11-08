@@ -3,10 +3,10 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 ## Notebooks
 
-- Statistics
+- [Statistics](statistics.ipynb)
     - Distance Metrics
     - Pearson Correlation
-- Algorithms
+- [Algorithms](algorithms.ipynb)
     - Binary Search
     - Recursion
     - Quicksort
