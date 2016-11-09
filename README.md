@@ -52,7 +52,7 @@ Using this algorithm, the machine is trained to make specific decisions. It work
 
 ## Computer Science Concepts
 
-#$# Structures
+## Structures
 Arrays, linked lists, hash tables/maps and binary trees
 
 ### Search
