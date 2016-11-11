@@ -14,3 +14,4 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 - [Machine Learning Concepts](notes/ml_concepts.md)
 - [Computer Science Concepts](notes/cs_concepts.md)
+- [Machine Learning Workflows](notes/ml_workflows.md)

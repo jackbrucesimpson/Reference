@@ -1,8 +1,8 @@
 # Machine Learning Concepts
 
-Things I'm interested in at the moment - different machine learning techniques and workflows.
+Things I'm interested in at the moment
 
-![workflow](../resources/ml_steps.png)
+
 
 ## Supervised
 This algorithm consist of a target / outcome variable (or dependent variable) which is to be predicted from a given set of predictors (independent variables).
