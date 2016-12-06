@@ -2,6 +2,8 @@
 Implementing algorithms from scratch so I can learn more about machine learning, statistics and computer science.
 
 ## Notebooks
+
+### Machine Learning
 - [Machine Learning Recipes](notebooks/ml_recipes.ipynb)
     - Splitting Training and Testing Data
     - Decision Trees
@@ -10,11 +12,16 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [Programmers Guide](notebooks/programmers_guide.ipynb)
     - Distance Metrics
     - Pearson Correlation
+
+### Natural Language Processing
 - [Machine Learning with Text](notebooks/ml_text.ipynb)
     - Uses scikit-learn analyse text
     - Bag of words
 - [Natural Language](notebooks/natural_language.ipynb)
     - Notes from NLTK tutorial series
+    - Notes from PyCon workshop on NLTK
+
+### Bayesian Statistics
 - [Bayes Made Simple](notebooks/bayes_simple.ipynb)
     - Notes from PyCon workshop on Bayesian statistics and a few other articles I've read on the topic
 
