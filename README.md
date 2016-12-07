@@ -12,6 +12,9 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [Programmers Guide](notebooks/programmers_guide.ipynb)
     - Distance Metrics
     - Pearson Correlation
+- [Unsupervised Machine Learning](notebooks/unsupervised_ml.ipynb)
+    - K-means clustering
+    - Hierarchical Clustering
 - [Practical Machine Learning](notebooks/practical_ml.ipynb)
     - Implementing machine learning algorithms from scratch using stock market data
 
@@ -26,6 +29,8 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 ### Statistics
 - [Bayes Made Simple](notebooks/bayes_simple.ipynb)
     - Notes from PyCon workshop on Bayesian statistics and a few other articles I've read on the topic
+- [Monte Carlo Introduction](notebooks/monte_carlo_intro.ipynb)
+    - 
 
 # Concepts
 
