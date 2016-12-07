@@ -9,7 +9,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - Decision Trees
     - Visualising Tree Decisions
     - K-Nearest Neighbours (implemented from scratch)
-- [Programmers Guide](notebooks/programmers_guide.ipynb)
+- [Programmers Guide to Data Mining](notebooks/programmers_guide.ipynb)
     - Distance Metrics
     - Pearson Correlation
 - [Unsupervised Machine Learning](notebooks/unsupervised_ml.ipynb)
