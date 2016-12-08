@@ -112,4 +112,4 @@ Look at where each model is wrong and see if the cost of the error is the same. 
 - How it intends to use this data
 - What it hopes to achieve from these analyses.
 
-![](ml_emoji.jpeg)
+![](resources/ml_emoji.jpeg)
