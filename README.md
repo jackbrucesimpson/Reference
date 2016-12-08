@@ -20,11 +20,10 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 ### Natural Language Processing
 - [Machine Learning with Text](notebooks/ml_text.ipynb)
-    - Uses scikit-learn analyse text
-    - Bag of words
+    - Notes from PyCon workshop on NLTK
+    - Uses scikit-learn analyse text, covers bag of words
 - [Natural Language](notebooks/natural_language.ipynb)
     - Notes from NLTK tutorial series
-    - Notes from PyCon workshop on NLTK
 
 ### Statistics
 - [Bayes Made Simple](notebooks/bayes_simple.ipynb)
@@ -67,3 +66,50 @@ Using this algorithm, the machine is trained to make specific decisions. It work
 - Map Visualization
 - 3D Graphs
 - Correlogram
+
+# Data Scientist Requirements
+
+## Statistics/ML
+- Bayes/Probability
+- Correlation/Regression/Logistic Regression
+	- ridge regression and LASSO
+- Explain the following parts of a linear regression to me: p-value, coefficient, R-Squared value. What is the significance of each of these components and what assumptions do we hold when creating a linear regression?
+- Assume you need to generate a predictive model of a quantitative outcome variable using multiple regression. Explain how you intend to validate this model.
+- Explain what precision and recall are. How do they relate to the ROC curve?
+- Explain what a long tailed distribution is and provide three examples of relevant phenomena that have long tails. Why are they important in classification and prediction problems?
+- Random Forest
+- Data:
+	- Difference between qualitative and quantitative data
+	- How would you analyse both?
+	- What is the Central Limit Theorem and why is it important in data science?
+	- How do you handle missing data?
+	- Explain the 80/20 rule, and tell me about it's importance in model validation.
+	- In your opinion, which is more important when designing a machine learning model: Model performance? or model accuracy?
+	- What is one way that you would handle an imbalanced data set that's being used for prediction? (i.e. vastly more negative classes than positive classes.)
+- Explain like I'm 5: K-Means clustering algorithm.
+- Explain what a local optimum is and why it is important in a specific context, such as k-means clustering. What are specific ways for determining if you have a local optimum problem? What can be done to avoid local optima?
+- I have two models of comparable accuracy and computational performance. Which one should I choose for production and why? Verify that comparable accuracy means comparable precision/recall/etc. Then go for the more interpretable one, or for the more established algorithm. I.E. if logistic regression does as well as an SVM with a custom kernel, go for logistic regression.
+Depending on the model, try to look into the logic using something line LIME and choose the one that's consistent with your intuition.
+Look at where each model is wrong and see if the cost of the error is the same. Example: both models are wrong 10% of the time, but one is wrong about customers worth 100k and the other is wrong about customers worth 10k, choose the second.
+
+# Problem Solving
+- Estimate the number of 'Happy Birthday' posts that are logged on Facebook everyday.
+- You have a data set containing 100K rows, and 100 columns, with one of those columns being our dependent variable for a problem we'd like to solve. How can we quickly identify which columns will be helpful in predicting the dependent variable. Identify two techniques and explain them to me as though I were 5 years old.
+- Given tweets and Facebook statuses surrounding a new movie that was recently released, how will you determine the public's reaction to the movie?
+- 
+
+## Programming
+- SQL:
+	- Difference between an inner join, left join/right join, and union
+	- Apply these techniques to a theoretical data analysis question
+
+## Visualisation
+- What are your 3 favourite data visualization techniques?
+
+## Business
+- How the business works
+- How it collects its data
+- How it intends to use this data
+- What it hopes to achieve from these analyses.
+
+![](ml_emoji.jpeg)
