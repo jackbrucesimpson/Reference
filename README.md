@@ -5,31 +5,52 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 ### Machine Learning
 - [Machine Learning Recipes](notebooks/ml_recipes.ipynb)
+    - Video [course](https://www.youtube.com/playlist?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal) by Google.
     - Splitting Training and Testing Data
     - Decision Trees
     - Visualising Tree Decisions
     - K-Nearest Neighbours (implemented from scratch)
 - [Programmers Guide to Data Mining](notebooks/programmers_guide.ipynb)
+    - [Book](http://guidetodatamining.com/) on machine learning
     - Distance Metrics
     - Pearson Correlation
 - [Unsupervised Machine Learning](notebooks/unsupervised_ml.ipynb)
+    - Notes from [video series](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)
     - K-means clustering
     - Hierarchical Clustering
 - [Practical Machine Learning](notebooks/practical_ml.ipynb)
+    - Tutorial [video series](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v) notes
     - Implementing machine learning algorithms from scratch using stock market data
 
 ### Natural Language Processing
 - [Machine Learning with Text](notebooks/ml_text.ipynb)
-    - Notes from PyCon workshop on NLTK
+    - Notes from the talk on [machine learning with text](https://www.youtube.com/watch?v=vTaxdJ6VYWE) at PyData.
     - Uses scikit-learn analyse text, covers bag of words
 - [Natural Language](notebooks/natural_language.ipynb)
+    - Notes from the [NLTK with Python 3 tutorial series](https://www.youtube.com/playlist?list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL)
     - Notes from NLTK tutorial series
+    - Also notes from [Natural Language Processing with NLTK and Gensim](https://www.youtube.com/watch?v=itKNpCPHq3I) PyCon Workshop
 
 ### Statistics
 - [Bayes Made Simple](notebooks/bayes_simple.ipynb)
-    - Notes from PyCon workshop on Bayesian statistics and a few other articles I've read on the topic
+    - Notes from [PyCon workshop on Bayesian statistics](https://www.youtube.com/watch?v=6GV5bTCLC8g) on Bayesian Statistics
+    - Notes from the [Think Bayes](http://greenteapress.com/wp/think-bayes/) book
+    - Notes from [article](https://www.analyticsvidhya.com/blog/2016/06/bayesian-statistics-beginners-simple-english/)
+    - Notes from [article](https://www.springboard.com/blog/probability-bayes-theorem-data-science/)
 - [Monte Carlo Introduction](notebooks/monte_carlo_intro.ipynb)
-    - 
+    - Notes from the [video tutorial](https://www.youtube.com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0) series
+
+### Programming
+- [Python Multiprocessing](notebooks/py_multiprocess.ipynb)
+    - Notes from video [1](https://youtu.be/oEYDqQ1pq9o) & [2](https://youtu.be/kUKOEuPJXGc)
+    - Using Python's multiprocessing module
+- [Python Decorators](notebooks/py_decorators.ipynb)
+    - Notes from [video](https://www.youtube.com/watch?v=rPCeCPT-f28&list=LLuei0qkBoeOass8xV_cOrqQ&index=1)
+- [MyPy](notebooks/my_py.ipynb)
+    - [MyPy](http://mypy-lang.org/) type checker for Python.
+- Python VirtualEnv
+    - [Create and install](http://docs.python-guide.org/en/latest/dev/virtualenvs/) Python packages in own environment.
+    - virtualenv venv -> cd $DIR -> source venv/bin/activate
 
 # Concepts
 
