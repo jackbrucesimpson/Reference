@@ -41,6 +41,8 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - Notes from the [video tutorial](https://www.youtube.com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0) series
 
 ### Programming
+- [Web Scraping with Beautiful Soup](notebooks/beautiful_soup.ipynb)
+    - Notes from [video series](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfV1MIRBOcqClP6VZXsvyZS)
 - [Python Multiprocessing](notebooks/py_multiprocess.ipynb)
     - Notes from video [1](https://youtu.be/oEYDqQ1pq9o) & [2](https://youtu.be/kUKOEuPJXGc)
     - Using Python's multiprocessing module
@@ -51,6 +53,10 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - Python VirtualEnv
     - [Create and install](http://docs.python-guide.org/en/latest/dev/virtualenvs/) Python packages in own environment.
     - virtualenv venv -> cd $DIR -> source venv/bin/activate
+- [Python Base64](notebooks/py_base64.ipynb)
+    - Encode and decode Images
+    - Resize images with PIL
+    
 
 # Concepts
 
