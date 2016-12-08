@@ -68,6 +68,7 @@ Using this algorithm, the machine is trained to make specific decisions. It work
 - Correlogram
 
 # Data Scientist Requirements
+Questions and notes I've found online that can help me focus my learning.
 
 ## Statistics/ML
 - Bayes/Probability
@@ -96,7 +97,6 @@ Look at where each model is wrong and see if the cost of the error is the same. 
 - Estimate the number of 'Happy Birthday' posts that are logged on Facebook everyday.
 - You have a data set containing 100K rows, and 100 columns, with one of those columns being our dependent variable for a problem we'd like to solve. How can we quickly identify which columns will be helpful in predicting the dependent variable. Identify two techniques and explain them to me as though I were 5 years old.
 - Given tweets and Facebook statuses surrounding a new movie that was recently released, how will you determine the public's reaction to the movie?
-- 
 
 ## Programming
 - SQL:
