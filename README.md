@@ -1,61 +1,33 @@
 # Learning
-Implementing algorithms from scratch so I can learn more about machine learning, statistics and computer science.
+Implementing algorithms from scratch so I can learn more about machine learning, statistics and computer science. Can set up a Python [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/) with: `virtualenv venv -> cd $DIR -> source venv/bin/activate`
 
 ## Notebooks
 
 ### Machine Learning
-- [Machine Learning Recipes](notebooks/ml_recipes.ipynb)
-    - Video [course](https://www.youtube.com/playlist?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal) by Google.
-    - Splitting Training and Testing Data
-    - Decision Trees
-    - Visualising Tree Decisions
-    - K-Nearest Neighbours (implemented from scratch)
-- [Programmers Guide to Data Mining](notebooks/programmers_guide.ipynb)
-    - [Book](http://guidetodatamining.com/) on machine learning
-    - Distance Metrics
-    - Pearson Correlation
-- [Unsupervised Machine Learning](notebooks/unsupervised_ml.ipynb)
-    - Notes from [video series](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)
-    - K-means clustering
-    - Hierarchical Clustering
-- [Practical Machine Learning](notebooks/practical_ml.ipynb)
-    - Tutorial [video series](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v) notes
-    - Implementing machine learning algorithms from scratch using stock market data
+- Machine Learning Recipes [[1](https://www.youtube.com/playlist?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal)]
+    - [Decision Trees and visualising decisions](notebooks/ml_recipes_1.ipynb)
+    - [Implementing KNN and Euclidean distance from scratch](notebooks/ml_recipes_2.ipynb)
+- Programmers Guide to Data Mining [[1](http://guidetodatamining.com/)]
+    - [Collaborative filtering: distance metrics & pearson correlation](notebooks/programmers_guide_1.ipynb)
+- [Unsupervised Machine Learning: k-means & mean-shift](notebooks/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
+- Practical Machine Learning [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)]
+    - [Sklearn regression, SVM & pickling with share market data](notebooks/practical_ml_1.ipynb)
+    - [Implementing regression from scratch](notebooks/practical_ml_2.ipynb)
 
 ### Natural Language Processing
-- [Machine Learning with Text](notebooks/ml_text.ipynb)
-    - Notes from the talk on [machine learning with text](https://www.youtube.com/watch?v=vTaxdJ6VYWE) at PyData.
-    - Uses scikit-learn analyse text, covers bag of words
-- [Natural Language](notebooks/natural_language.ipynb)
-    - Notes from the [NLTK with Python 3 tutorial series](https://www.youtube.com/playlist?list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL)
-    - Notes from NLTK tutorial series
-    - Also notes from [Natural Language Processing with NLTK and Gensim](https://www.youtube.com/watch?v=itKNpCPHq3I) PyCon Workshop
+- [Machine Learning with Text: Sklearn & bag of words](notebooks/ml_text.ipynb) [[1](https://www.youtube.com/watch?v=vTaxdJ6VYWE)]
+- [NLTK with Python 3 for Natural Language Processing](notebooks/natural_language.ipynb) [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL), [2](https://www.youtube.com/watch?v=itKNpCPHq3I)]
 
 ### Statistics
-- [Bayes Made Simple](notebooks/bayes_simple.ipynb)
-    - Notes from [PyCon workshop on Bayesian statistics](https://www.youtube.com/watch?v=6GV5bTCLC8g) on Bayesian Statistics
-    - Notes from the [Think Bayes](http://greenteapress.com/wp/think-bayes/) book
-    - Notes from [article](https://www.analyticsvidhya.com/blog/2016/06/bayesian-statistics-beginners-simple-english/)
-    - Notes from [article](https://www.springboard.com/blog/probability-bayes-theorem-data-science/)
-- [Monte Carlo Introduction](notebooks/monte_carlo_intro.ipynb)
-    - Notes from the [video tutorial](https://www.youtube.com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0) series
+- [Bayes Made Simple](notebooks/bayes_simple.ipynb) [[1](https://www.youtube.com/watch?v=6GV5bTCLC8g), [2](http://greenteapress.com/wp/think-bayes/), [3](https://www.analyticsvidhya.com/blog/2016/06/bayesian-statistics-beginners-simple-english/), [4](https://www.springboard.com/blog/probability-bayes-theorem-data-science/)]
+- [Monte Carlo Simulation with Python](notebooks/monte_carlo_intro.ipynb) [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0)]
 
 ### Programming
-- [Web Scraping with Beautiful Soup](notebooks/beautiful_soup.ipynb)
-    - Notes from [video series](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfV1MIRBOcqClP6VZXsvyZS)
-- [Python Multiprocessing](notebooks/py_multiprocess.ipynb)
-    - Notes from video [1](https://youtu.be/oEYDqQ1pq9o) & [2](https://youtu.be/kUKOEuPJXGc)
-    - Using Python's multiprocessing module
-- [Python Decorators](notebooks/py_decorators.ipynb)
-    - Notes from [video](https://www.youtube.com/watch?v=rPCeCPT-f28&list=LLuei0qkBoeOass8xV_cOrqQ&index=1)
-- [MyPy](notebooks/my_py.ipynb)
-    - [MyPy](http://mypy-lang.org/) type checker for Python.
-- Python VirtualEnv
-    - [Create and install](http://docs.python-guide.org/en/latest/dev/virtualenvs/) Python packages in own environment.
-    - virtualenv venv -> cd $DIR -> source venv/bin/activate
-- [Python Base64](notebooks/py_base64.ipynb)
-    - Encode and decode Images
-    - Resize images with PIL
+- [Web Scraping with Beautiful Soup](notebooks/beautiful_soup.ipynb) [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfV1MIRBOcqClP6VZXsvyZS)]
+- [Python Multiprocessing](notebooks/py_multiprocess.ipynb) [[1](https://youtu.be/oEYDqQ1pq9o), [2](https://youtu.be/kUKOEuPJXGc)]
+- [Python Decorators](notebooks/py_decorators.ipynb) [[1](https://www.youtube.com/watch?v=rPCeCPT-f28&list=LLuei0qkBoeOass8xV_cOrqQ&index=1)]
+- [MyPy Python Type Checker](notebooks/my_py.ipynb) [[1](http://mypy-lang.org/)]
+- [Python Base64 Encode/Decode & PIL](notebooks/py_base64.ipynb)
     
 
 # Concepts
