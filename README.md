@@ -1,4 +1,4 @@
-# Learning
+# Reference
 Implementing algorithms from scratch so I can learn more about machine learning, statistics and computer science. Can set up a Python [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/) with: `virtualenv venv -> cd $DIR -> source venv/bin/activate`
 
 ## Notebooks
