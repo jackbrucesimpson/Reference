@@ -8,7 +8,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Decision Trees and visualising decisions](notebooks/ml_recipes_1.ipynb)
     - [Implementing KNN and Euclidean distance from scratch](notebooks/ml_recipes_2.ipynb)
 - Programmers Guide to Data Mining [[1](http://guidetodatamining.com/)]
-    - [Collaborative filtering: distance metrics & pearson correlation](notebooks/programmers_guide_1.ipynb)
+    - [Collaborative filtering: pearson correlation, cosine similarity](notebooks/programmers_guide_1.ipynb)
 - [Unsupervised Machine Learning: k-means & mean-shift](notebooks/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
 - Practical Machine Learning [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)]
     - [Sklearn regression, SVM & pickling with share market data](notebooks/practical_ml_1.ipynb)
