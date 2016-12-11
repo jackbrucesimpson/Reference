@@ -8,7 +8,8 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Decision Trees and visualising decisions](notebooks/ml_recipes_1.ipynb)
     - [Implementing KNN and Euclidean distance from scratch](notebooks/ml_recipes_2.ipynb)
 - Programmers Guide to Data Mining [[1](http://guidetodatamining.com/)]
-    - [Collaborative filtering: pearson correlation, cosine similarity](notebooks/programmers_guide_1.ipynb)
+    - [Collaborative filtering: pearson correlation, cosine similarity, KNN](notebooks/programmers_guide_1.ipynb)
+    - [Implicit ratings and item based filtering](notebooks/programmers_guide_2.ipynb)
 - [Unsupervised Machine Learning: k-means & mean-shift](notebooks/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
 - Practical Machine Learning [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)]
     - [Sklearn regression, SVM & pickling with share market data](notebooks/practical_ml_1.ipynb)
@@ -23,7 +24,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [Monte Carlo Simulation with Python](notebooks/monte_carlo_intro.ipynb) [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0)]
 
 ### Programming
-- [Web Scraping with Beautiful Soup](notebooks/beautiful_soup.ipynb) [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfV1MIRBOcqClP6VZXsvyZS)]
+- [Web Scraping with Beautiful Soup](notebooks/beautiful_soup.ipynb) [[1](https://www.dataquest.io/blog/web-scraping-tutorial-python/)]
 - [Python Multiprocessing](notebooks/py_multiprocess.ipynb) [[1](https://youtu.be/oEYDqQ1pq9o), [2](https://youtu.be/kUKOEuPJXGc)]
 - [Python Decorators](notebooks/py_decorators.ipynb) [[1](https://www.youtube.com/watch?v=rPCeCPT-f28&list=LLuei0qkBoeOass8xV_cOrqQ&index=1)]
 - [MyPy Python Type Checker](notebooks/my_py.ipynb) [[1](http://mypy-lang.org/)]
