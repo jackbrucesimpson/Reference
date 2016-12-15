@@ -12,6 +12,9 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Implicit ratings and item based filtering](notebooks/programmers_guide_2.ipynb)
     - [Classification based on item attributes](notebooks/programmers_guide_3.ipynb)
     - [Evaluating Algorithms](notebooks/programmers_guide_4.ipynb)
+    - [Naïve Bayes](notebooks/programmers_guide_5.ipynb)
+    - [Unstructured Text](notebooks/programmers_guide_6.ipynb)
+    - [Clustering](notebooks/programmers_guide_7.ipynb)
 - [Unsupervised Machine Learning: k-means & mean-shift](notebooks/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
 - Practical Machine Learning [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)]
     - [Sklearn regression, SVM & pickling with share market data](notebooks/practical_ml_1.ipynb)
