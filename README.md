@@ -1,5 +1,5 @@
 # Reference
-Implementing algorithms from scratch so I can learn more about machine learning, statistics and computer science. Can set up a Python [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/) with: `virtualenv venv -> cd $DIR -> source venv/bin/activate`
+Implementing algorithms from scratch so I can learn more about machine learning, statistics and computer science.
 
 ## Notebooks
 
@@ -34,3 +34,24 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [Python Decorators](notebooks/py_decorators.ipynb) [[1](https://www.youtube.com/watch?v=rPCeCPT-f28&list=LLuei0qkBoeOass8xV_cOrqQ&index=1)]
 - [MyPy Python Type Checker](notebooks/my_py.ipynb) [[1](http://mypy-lang.org/)]
 - [Python Base64 Encode/Decode & PIL](notebooks/py_base64.ipynb)
+- [Python Args & Kwargs](notebooks/args_kwargs.ipynb) [[1](https://youtu.be/gZB_ENJD34E)]
+- [Python Logging](notebooks/python_logging.ipynb) [[1](https://youtu.be/-RcDmGNSuvU)]
+
+## System Notes
+
+- Python [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/): `virtualenv venv -> cd $DIR -> source venv/bin/activate`
+- Updating all Python packages `pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U`
+- Homebrew update and upgrade: `brew update && brew upgrade`
+- Reload module and output version information
+```
+%load_ext autoreload
+%autoreload 2
+
+%load_ext version_information
+%version_information numpy, scipy, matplotlib, pandas
+```
+- Run back in the Jupyter notebook
+```
+%%bash
+curl http://google.com
+```
