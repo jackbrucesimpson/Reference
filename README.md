@@ -36,6 +36,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [Python Base64 Encode/Decode & PIL](notebooks/py_base64.ipynb)
 - [Python Args & Kwargs](notebooks/args_kwargs.ipynb) [[1](https://youtu.be/gZB_ENJD34E)]
 - [Python Logging](notebooks/python_logging.ipynb) [[1](https://youtu.be/-RcDmGNSuvU)]
+- [SQL in the Jupyter Notebook](notebooks/ipython_sql.ipynb)
 
 ## System Notes
 
@@ -50,7 +51,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 %load_ext version_information
 %version_information numpy, scipy, matplotlib, pandas
 ```
-- Run back in the Jupyter notebook
+- Run bash in the Jupyter notebook
 ```
 %%bash
 curl http://google.com
