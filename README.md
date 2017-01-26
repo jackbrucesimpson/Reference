@@ -20,6 +20,9 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Implementing regression from scratch](notebooks/practical_ml_2.ipynb)
 - [Unsupervised Machine Learning: k-means & mean-shift](notebooks/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
 
+### Deep Learning
+- [Keras](notebooks/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/)]
+
 ### Natural Language Processing
 - [Machine Learning with Text: Sklearn & bag of words](notebooks/ml_text.ipynb) [[1](https://www.youtube.com/watch?v=vTaxdJ6VYWE)]
 - [NLTK with Python 3 for Natural Language Processing](notebooks/natural_language.ipynb) [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL), [2](https://www.youtube.com/watch?v=itKNpCPHq3I)]
