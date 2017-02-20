@@ -22,7 +22,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 ### Deep Learning
 - [Intro to Keras](notebooks/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/)]
-- [Installing Keras with Tensorflow and CUDA](keras_install_cuda_tf.md)
+- [Installing Keras with Tensorflow and CUDA](notebooks/keras_install_cuda_tf.md)
 
 ### Natural Language Processing
 - [Machine Learning with Text: Sklearn & bag of words](notebooks/ml_text.ipynb) [[1](https://www.youtube.com/watch?v=vTaxdJ6VYWE)]
