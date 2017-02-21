@@ -21,8 +21,10 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [Unsupervised Machine Learning: k-means & mean-shift](notebooks/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
 
 ### Deep Learning
-- [Intro to Keras](notebooks/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/)]
 - [Installing Keras with Tensorflow and CUDA](notebooks/keras_install_cuda_tf.md)
+- [Intro to Keras with diabetes dataset](notebooks/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/)]
+- [Intro to Keras with MNIST](/notebooks/intro_keras_mnist.ipynb) [[1](https://elitedatascience.com/keras-tutorial-deep-learning-in-python)]
+- [Using Keras to solve MNIST](/notebooks/keras_solve_mnist.ipynb) [[1](http://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/)]
 
 ### Natural Language Processing
 - [Machine Learning with Text: Sklearn & bag of words](notebooks/ml_text.ipynb) [[1](https://www.youtube.com/watch?v=vTaxdJ6VYWE)]
