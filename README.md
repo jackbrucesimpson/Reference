@@ -22,7 +22,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 ### Deep Learning
 - [Installing Keras with Tensorflow and CUDA](notebooks/keras_install_cuda_tf.md)
-- [Intro to Keras with diabetes dataset and saving models](notebooks/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/), [3](http://machinelearningmastery.com/save-load-keras-deep-learning-models/), [4](http://machinelearningmastery.com/5-step-life-cycle-neural-network-models-keras/)]
+- [Intro to Keras with diabetes dataset and saving models](notebooks/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/), [3](http://machinelearningmastery.com/save-load-keras-deep-learning-models/), [4](http://machinelearningmastery.com/5-step-life-cycle-neural-network-models-keras/), [5](http://machinelearningmastery.com/build-multi-layer-perceptron-neural-network-models-keras/)]
 - [Intro to Keras with MNIST](/notebooks/intro_keras_mnist.ipynb) [[1](https://elitedatascience.com/keras-tutorial-deep-learning-in-python)]
 - [Using Keras to solve MNIST](/notebooks/keras_solve_mnist.ipynb) [[1](http://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/), [2](http://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/)]
 
