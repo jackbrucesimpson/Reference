@@ -20,10 +20,13 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Implementing regression from scratch](notebooks/practical_ml_2.ipynb)
 - [Unsupervised Machine Learning: k-means & mean-shift](notebooks/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
 
-### Deep Learning
+### Deep Learning (Background [[1](https://www.analyticsvidhya.com/blog/2016/08/evolution-core-concepts-deep-learning-neural-networks/), [2](https://www.youtube.com/watch?v=h3l4qz76JhQ)])
 - [Intro to Keras with diabetes dataset and saving models](notebooks/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/), [3](http://machinelearningmastery.com/save-load-keras-deep-learning-models/), [4](http://machinelearningmastery.com/5-step-life-cycle-neural-network-models-keras/), [5](http://machinelearningmastery.com/build-multi-layer-perceptron-neural-network-models-keras/)]
 - [Intro to Keras with MNIST](/notebooks/intro_keras_mnist.ipynb) [[1](https://elitedatascience.com/keras-tutorial-deep-learning-in-python)]
 - [Using Keras to solve MNIST](/notebooks/keras_solve_mnist.ipynb) [[1](http://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/), [2](http://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/)]
+- [Regression Tutorial with the Keras](/notebooks/keras_regression_tutorial.ipynb) [[1](http://machinelearningmastery.com/regression-tutorial-keras-deep-learning-library-python/)]
+- [Keras Multi-Class Classification on Iris Dataset](/notebooks/keras_iris_tutorial.ipynb) [[1](http://machinelearningmastery.com/multi-class-classification-tutorial-keras-deep-learning-library/)]
+- [Binary classification of sonar data using Keras](/notebooks/binary_classification_keras_sonar.ipynb) [[1](http://machinelearningmastery.com/binary-classification-tutorial-with-the-keras-deep-learning-library/)]
 
 ### Natural Language Processing
 - [Machine Learning with Text: Sklearn & bag of words](notebooks/ml_text.ipynb) [[1](https://www.youtube.com/watch?v=vTaxdJ6VYWE)]
