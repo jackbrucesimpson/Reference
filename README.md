@@ -45,6 +45,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [Python Args & Kwargs](notebooks/args_kwargs.ipynb) [[1](https://youtu.be/gZB_ENJD34E)]
 - [Python Logging](notebooks/python_logging.ipynb) [[1](https://youtu.be/-RcDmGNSuvU)]
 - [SQL in the Jupyter Notebook](notebooks/ipython_sql.ipynb)
+- [Cython](notebooks/cy_py.ipynb)
 
 ## System Notes
 
