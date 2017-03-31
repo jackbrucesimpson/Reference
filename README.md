@@ -19,6 +19,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Sklearn regression, SVM & pickling with share market data](notebooks/practical_ml_1.ipynb)
     - [Implementing regression from scratch](notebooks/practical_ml_2.ipynb)
 - [Unsupervised Machine Learning: k-means & mean-shift](notebooks/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
+- [House Price Estimation](notebooks/house_price_estimation.ipynb) [[1](https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471)]
 
 ### Deep Learning [[1](https://www.analyticsvidhya.com/blog/2016/08/evolution-core-concepts-deep-learning-neural-networks/), [2](https://www.youtube.com/watch?v=h3l4qz76JhQ), [3](https://www.youtube.com/watch?v=cAICT4Al5Ow)]
 - [Intro to Keras with diabetes dataset and saving models](notebooks/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/), [3](http://machinelearningmastery.com/save-load-keras-deep-learning-models/), [4](http://machinelearningmastery.com/5-step-life-cycle-neural-network-models-keras/), [5](http://machinelearningmastery.com/build-multi-layer-perceptron-neural-network-models-keras/)]
