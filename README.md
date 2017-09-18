@@ -1,4 +1,4 @@
-# Reference
+# Learning
 Implementing algorithms from scratch so I can learn more about machine learning, statistics and computer science.
 
 ## Notebooks
@@ -48,21 +48,3 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [SQL in the Jupyter Notebook](notebooks/ipython_sql.ipynb)
 - [Cython: Compiling Python](notebooks/cy_py.ipynb)
 
-## System Notes
-
-- Python [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/): `virtualenv venv -> cd $DIR -> source venv/bin/activate`
-- Updating all Python packages `pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U`
-- Homebrew update and upgrade: `brew update && brew upgrade`
-- Reload module and output version information
-```
-%load_ext autoreload
-%autoreload 2
-
-%load_ext version_information
-%version_information numpy, scipy, matplotlib, pandas
-```
-- Run bash in the Jupyter notebook
-```
-%%bash
-curl http://google.com
-```
