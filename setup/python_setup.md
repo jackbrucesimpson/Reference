@@ -25,4 +25,4 @@ python2 -m ipykernel install --user
 
 ## Linting
 
-`pip3 install flake8 flake8-docstrings`
+`pip2 install pyflakes`
