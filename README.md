@@ -1,4 +1,4 @@
-# Learning
+# Reference
 Implementing algorithms from scratch so I can learn more about machine learning, statistics and computer science.
 
 ## Notebooks
@@ -36,12 +36,17 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Implementing regression from scratch](notebooks/practical_ml/practical_ml_2.ipynb)
     - [Unsupervised Machine Learning: k-means & mean-shift](notebooks/practical_ml/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
 
+- Unsupervised
+    - [Visualising High Dimensional Datasets with PCA and T-SNE](notebooksunsupervised/visualising-high-dim-datasets-pca-tsne.ipynb) [[1](https://medium.com/@luckylwk/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b)]
 
 - Ensemble methods
     - [House Price Estimation](notebooks/ensemble/house_price_estimation.ipynb) [[1](https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471)]
-
+    - [Tour of ensemble methods](notebooks/ensemble/intro_ensemble.ipynb) [[1](https://machinelearningmastery.com/)]
+    - [XGBoost Machine Learning Mastery](notebooks/ensemble/intro_xgboost.ipynb) [[1](https://machinelearningmastery.com/)]
+    - [Extreme Gradient Boosting with XGBoost DataCamp](notebooks/ensemble/extreme_xgboost.ipynb)
 
 - Deep learning
+    - [DataCamp Deep Learning](notebooks/deep_learning/deeplearning-datacamp.ipynb)
     - [Intro to Keras with diabetes dataset and saving models](notebooks/deep_learning/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/), [3](http://machinelearningmastery.com/save-load-keras-deep-learning-models/), [4](http://machinelearningmastery.com/5-step-life-cycle-neural-network-models-keras/), [5](http://machinelearningmastery.com/build-multi-layer-perceptron-neural-network-models-keras/)]
     - [Intro to Keras with MNIST](/notebooks/deep_learning/intro_keras_mnist.ipynb) [[1](https://elitedatascience.com/keras-tutorial-deep-learning-in-python), [2](http://www.pyimagesearch.com/2016/08/01/lenet-convolutional-neural-network-in-python/)]
     - [Using Keras to solve MNIST](/notebooks/deep_learning/keras_solve_mnist.ipynb) [[1](http://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/), [2](http://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/)]
@@ -63,6 +68,9 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Bayes Made Simple](notebooks/statistics/bayes_simple.ipynb) [[1](https://www.youtube.com/watch?v=6GV5bTCLC8g), [2](http://greenteapress.com/wp/think-bayes/), [3](https://www.analyticsvidhya.com/blog/2016/06/bayesian-statistics-beginners-simple-english/), [4](https://www.springboard.com/blog/probability-bayes-theorem-data-science/)]
     - [Monte Carlo Simulation with Python](notebooks/statistics/monte_carlo_intro.ipynb) [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0)]
 
+- Spark
+    [PySpark DataCamp](notebooks/spark/datacamp-spark.ipynb)
+
 
 ### Programming
 - [Web Scraping with Beautiful Soup](notebooks/programming/beautiful_soup.ipynb) [[1](https://www.dataquest.io/blog/web-scraping-tutorial-python/)]
@@ -81,3 +89,15 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [CUDA, cuDNN, TensorFlow, and Keras Setup on Ubuntu 16.04](setup/cuda_tf_setup.md)
 - [Setup Xcode Command Line Tools on macOS](setup/xcode_command_line.md)
 
+## Interesting Datasets
+- [3 Million Instacart Orders](https://tech.instacart.com/3-million-instacart-orders-open-sourced-d40d29ead6f2)
+- [NSW land valuations](http://www.valuergeneral.nsw.gov.au/land_value_summaries/lv.php)
+- [WalMart: Sales by department for 40 stores](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting)
+- [Amazon product review data](http://jmcauley.ucsd.edu/data/amazon/)
+- [Wikipedia Traffic Statistics V2](https://aws.amazon.com/datasets/wikipedia-traffic-statistics-v2/)
+- [Common Crawl: A corpus of web crawl data composed of over 5 billion web pages](https://aws.amazon.com/public-datasets/common-crawl/)
+- [Amazon Bin Image Dataset: Over 500,000 bin JPEG images and corresponding JSON metadata files describing products in an operating Amazon Fulfillment Center](https://aws.amazon.com/public-datasets/amazon-bin-images/)
+- [GDELT: Over a quarter-billion records monitoring the world's broadcast, print, and web news from nearly every corner of every country, updated daily](https://aws.amazon.com/public-datasets/gdelt/)
+- [Multimedia Commons: A collection of nearly 100M images and videos with audio and visual features and annotations](https://aws.amazon.com/public-datasets/multimedia-commons/)
+- [Google Books Ngrams: A dataset containing Google Books n-gram corpuses](https://aws.amazon.com/datasets/google-books-ngrams/)
+- [SpaceNet on AWS: A corpus of commercial satellite imagery and labeled training data to foster innovation in the development of computer vision algorithms](https://aws.amazon.com/public-datasets/spacenet/)
