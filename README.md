@@ -37,7 +37,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Unsupervised Machine Learning: k-means & mean-shift](notebooks/practical_ml/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
 
 - Unsupervised
-    - [Visualising High Dimensional Datasets with PCA and T-SNE](notebooksunsupervised/visualising-high-dim-datasets-pca-tsne.ipynb) [[1](https://medium.com/@luckylwk/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b)]
+    - [Visualising High Dimensional Datasets with PCA and T-SNE](notebooks/unsupervised/visualising-high-dim-datasets-pca-tsne.ipynb) [[1](https://medium.com/@luckylwk/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b)]
 
 - Ensemble methods
     - [House Price Estimation](notebooks/ensemble/house_price_estimation.ipynb) [[1](https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471)]
