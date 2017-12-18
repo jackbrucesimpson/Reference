@@ -66,7 +66,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 - Statistics
     - [Bayes Made Simple](notebooks/statistics/bayes_simple.ipynb) [[1](https://www.youtube.com/watch?v=6GV5bTCLC8g), [2](http://greenteapress.com/wp/think-bayes/), [3](https://www.analyticsvidhya.com/blog/2016/06/bayesian-statistics-beginners-simple-english/), [4](https://www.springboard.com/blog/probability-bayes-theorem-data-science/)]
-    - [Monte Carlo Simulation with Python](notebooks/statistics/monte_carlo_intro.ipynb) [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0)]
+    - [Monte Carlo Simulation with Python](notebooks/statistics/monte_carlo_intro.ipynb) [[1](https://www.youtube.- - com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0)]
 
 - Spark
     [PySpark DataCamp](notebooks/spark/datacamp-spark.ipynb)
