@@ -70,7 +70,10 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Monte Carlo Simulation with Python](notebooks/statistics/monte_carlo_intro.ipynb) [[1](https://www.youtube.- - com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0)]
 
 - Spark
-    [PySpark DataCamp](notebooks/spark/datacamp-spark.ipynb)
+    [Py
+- SQL
+    - [SQL Reference](notebooks/programming/sql_reference.ipynb) [[1](https://code.tutsplus.com/articles/sql-for-beginners--net-8200)]
+    - [SQL in the Jupyter Notebook](notebooks/programming/ipython_sql.ipynb)Spark DataCamp](notebooks/spark/datacamp-spark.ipynb)
 
 
 ### Programming
@@ -80,7 +83,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [MyPy Python Type Checker](notebooks/programming/my_py.ipynb) [[1](http://mypy-lang.org/)]
 - [Python Base64 Encode/Decode & PIL](notebooks/programming/py_base64.ipynb)
 - [Python Args & Kwargs](notebooks/programming/args_kwargs.ipynb) [[1](https://youtu.be/gZB_ENJD34E)]
-- [Python Logging](notebooks/programming/python_logging.ipynb) [[1](https://youtu.be/-RcDmGNSuvU)]
+- [Python LoggingGNSuvU)]
 - [SQL in the Jupyter Notebook](notebooks/programming/ipython_sql.ipynb)
 - [Cython: Compiling Python](notebooks/programming/cy_py.ipynb)
 
