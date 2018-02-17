@@ -5,16 +5,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 ### Data Analysis
 - Machine Learning Workflow
-    - Clean Data
-    - Explore
-    - Model
-    - 
-    
-    
-    
-    
-    
-    
+    - [Explore & clean](notebooks/ml_workflow/explore.ipynb)
     
 - Machine Learning Recipes [[1](https://www.youtube.com/playlist?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal)]
     - [Decision Trees and visualising decisions](notebooks/recipes/ml_recipes_1.ipynb)
