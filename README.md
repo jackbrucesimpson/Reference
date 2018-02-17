@@ -56,7 +56,8 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 
 - Networks
-    - [Networkx](notebooks/networks/intro_networks.ipynb) [[1](), [2]()]
+    - [Networkx](notebooks/networks/intro_networks.ipynb) [[1](https://www.youtube.com/watch?v=nN84qeE0jtM)], [[2](https://www.youtube.com/watch?v=yMSCWLma46s&feature=youtu.be)], [[](https://www.youtube.com/watch?v=1ErL1z_lKd8&feature=youtu.be)]
+    - [Networks DataCamp 1](notebooks/networks/networks-datacamp-1.ipynb)
 
 
 - NLP
@@ -101,3 +102,6 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [Multimedia Commons: A collection of nearly 100M images and videos with audio and visual features and annotations](https://aws.amazon.com/public-datasets/multimedia-commons/)
 - [Google Books Ngrams: A dataset containing Google Books n-gram corpuses](https://aws.amazon.com/datasets/google-books-ngrams/)
 - [SpaceNet on AWS: A corpus of commercial satellite imagery and labeled training data to foster innovation in the development of computer vision algorithms](https://aws.amazon.com/public-datasets/spacenet/)
+- [Predict Product Backorders](https://www.kaggle.com/tiredgeek/predict-bo-trial)
+- [Boston Housing Dataset](https://www.kaggle.com/heptapod/uci-ml-datasets)
+- [E-Commerce Data](https://www.kaggle.com/carrie1/ecommerce-data)
