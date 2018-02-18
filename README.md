@@ -6,11 +6,14 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 ### Data Analysis
 - Machine Learning Workflow
     - [Explore & clean](notebooks/ml_workflow/explore.ipynb)
+    - Feature engineering
+    - Missing values
+    - Imbalanced datasets
+    - Time series
     
 - Machine Learning Recipes [[1](https://www.youtube.com/playlist?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal)]
     - [Decision Trees and visualising decisions](notebooks/recipes/ml_recipes_1.ipynb)
     - [Implementing KNN and Euclidean distance from scratch](notebooks/recipes/ml_recipes_2.ipynb)
-
 
 - Programmers Guide to Data Mining [[1](http://guidetodatamining.com/)]
     - [Collaborative filtering: pearson correlation, cosine similarity, KNN](notebooks/programmers_guide/programmers_guide_1.ipynb)
@@ -20,7 +23,6 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Naïve Bayes](notebooks/programmers_guide/programmers_guide_5.ipynb)
     - [Unstructured Text](notebooks/programmers_guide/programmers_guide_6.ipynb)
     - [Clustering](notebooks/programmers_guide/programmers_guide_7.ipynb)
-
 
 - Practical Machine Learning [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)]
     - [Sklearn regression, SVM & pickling with share market data](notebooks/practical_ml/practical_ml_1.ipynb)
@@ -45,26 +47,23 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Keras Multi-Class Classification on Iris Dataset](/notebooks/deep_learning/keras_iris_tutorial.ipynb) [[1](http://machinelearningmastery.com/multi-class-classification-tutorial-keras-deep-learning-library/)]
     - [Binary classification of sonar data using Keras](/notebooks/deep_learning/binary_classification_keras_sonar.ipynb) [[1](http://machinelearningmastery.com/binary-classification-tutorial-with-the-keras-deep-learning-library/)]
 
-
 - Networks
     - [Networkx](notebooks/networks/intro_networks.ipynb) [[1](https://www.youtube.com/watch?v=nN84qeE0jtM)], [[2](https://www.youtube.com/watch?v=yMSCWLma46s&feature=youtu.be)], [[](https://www.youtube.com/watch?v=1ErL1z_lKd8&feature=youtu.be)]
     - [Networks DataCamp 1](notebooks/networks/networks-datacamp-1.ipynb)
 
-
 - NLP
     - [Machine Learning with Text: Sklearn & bag of words](notebooks/nlp/ml_text.ipynb) [[1](https://www.youtube.com/watch?v=vTaxdJ6VYWE)]
     - [NLTK with Python 3 for Natural Language Processing](notebooks/nlp/natural_language.ipynb) [[1](https://www.youtube.com/playlist?list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL), [2](https://www.youtube.com/watch?v=itKNpCPHq3I)]
-
 
 - Statistics
     - [Bayes Made Simple](notebooks/statistics/bayes_simple.ipynb) [[1](https://www.youtube.com/watch?v=6GV5bTCLC8g), [2](http://greenteapress.com/wp/think-bayes/), [3](https://www.analyticsvidhya.com/blog/2016/06/bayesian-statistics-beginners-simple-english/), [4](https://www.springboard.com/blog/probability-bayes-theorem-data-science/)]
     - [Monte Carlo Simulation with Python](notebooks/statistics/monte_carlo_intro.ipynb) [[1](https://www.youtube.- - com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0)]
 
 - Spark
-    [Py
+    - [PySpark DataCamp](notebooks/spark/datacamp-spark.ipynb)
 - SQL
     - [SQL Reference](notebooks/programming/sql_reference.ipynb) [[1](https://code.tutsplus.com/articles/sql-for-beginners--net-8200)]
-    - [SQL in the Jupyter Notebook](notebooks/programming/ipython_sql.ipynb)Spark DataCamp](notebooks/spark/datacamp-spark.ipynb)
+    - [SQL in the Jupyter Notebook](notebooks/programming/ipython_sql.ipynb)
 
 
 ### Programming
