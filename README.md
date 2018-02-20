@@ -61,9 +61,13 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 - Spark
     - [PySpark DataCamp](notebooks/spark/datacamp-spark.ipynb)
+
 - SQL
     - [SQL Reference](notebooks/programming/sql_reference.ipynb) [[1](https://code.tutsplus.com/articles/sql-for-beginners--net-8200)]
     - [SQL in the Jupyter Notebook](notebooks/programming/ipython_sql.ipynb)
+
+- Visualisation
+    - [Bokeh DataCamp](notebooks/visualisation/bokeh_datacamp.ipynb)
 
 
 ### Programming
