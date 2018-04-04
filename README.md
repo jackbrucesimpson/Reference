@@ -26,6 +26,7 @@ I also have some reference materials I've contributed to my company's [GitHub re
 
 - Unsupervised
     - [Visualising High Dimensional Datasets with PCA and T-SNE](notebooks/unsupervised/visualising-high-dim-datasets-pca-tsne.ipynb) [[1](https://medium.com/@luckylwk/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b)]
+    - [Unsupervised Learning in Python DataCamp]('notebooks/unsupervised/unsupervised_datacamp.ipynb') [[1](https://www.datacamp.com/courses/unsupervised-learning-in-python/)]
 
 - Ensemble methods
     - [House Price Estimation](notebooks/ensemble/house_price_estimation.ipynb) [[1](https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471)]
