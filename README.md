@@ -1,16 +1,11 @@
 # Reference
 Implementing algorithms from scratch so I can learn more about machine learning, statistics and computer science.
 
+I also have some reference materials I've contributed to my company's [GitHub repo](https://github.com/PortJacksonPartners/Training/blob/master/notebooks/exploration.ipynb).
+
 ## Notebooks
 
 ### Data Analysis
-- Machine Learning Workflow
-    - [Explore & clean](notebooks/ml_workflow/explore.ipynb)
-    - Feature engineering
-    - Missing values
-    - Imbalanced datasets
-    - Time series
-    
 - Machine Learning Recipes [[1](https://www.youtube.com/playlist?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal)]
     - [Decision Trees and visualising decisions](notebooks/recipes/ml_recipes_1.ipynb)
     - [Implementing KNN and Euclidean distance from scratch](notebooks/recipes/ml_recipes_2.ipynb)
@@ -48,7 +43,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
     - [Binary classification of sonar data using Keras](/notebooks/deep_learning/binary_classification_keras_sonar.ipynb) [[1](http://machinelearningmastery.com/binary-classification-tutorial-with-the-keras-deep-learning-library/)]
 
 - Networks
-    - [Networkx](notebooks/networks/intro_networks.ipynb) [[1](https://www.youtube.com/watch?v=nN84qeE0jtM)], [[2](https://www.youtube.com/watch?v=yMSCWLma46s&feature=youtu.be)], [[](https://www.youtube.com/watch?v=1ErL1z_lKd8&feature=youtu.be)]
+    - [Networkx](notebooks/networks/intro_networks.ipynb) [[1](https://www.youtube.com/watch?v=nN84qeE0jtM), [2](https://www.youtube.com/watch?v=yMSCWLma46s&feature=youtu.be), [3](https://www.youtube.com/watch?v=1ErL1z_lKd8&feature=youtu.be)]
     - [Networks DataCamp 1](notebooks/networks/networks-datacamp-1.ipynb)
 
 - NLP
@@ -57,7 +52,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 
 - Statistics
     - [Bayes Made Simple](notebooks/statistics/bayes_simple.ipynb) [[1](https://www.youtube.com/watch?v=6GV5bTCLC8g), [2](http://greenteapress.com/wp/think-bayes/), [3](https://www.analyticsvidhya.com/blog/2016/06/bayesian-statistics-beginners-simple-english/), [4](https://www.springboard.com/blog/probability-bayes-theorem-data-science/)]
-    - [Monte Carlo Simulation with Python](notebooks/statistics/monte_carlo_intro.ipynb) [[1](https://www.youtube.- - com/playlist?list=PLQVvvaa0QuDdhOnp-FnVStDsALpYk2hk0)]
+    - [Monte Carlo Simulation with Python](notebooks/statistics/monte_carlo_intro.ipynb) [[1](https://pythonprogramming.net/monte-carlo-simulator-python/)]
 
 - Spark
     - [PySpark DataCamp](notebooks/spark/datacamp-spark.ipynb)
@@ -77,7 +72,7 @@ Implementing algorithms from scratch so I can learn more about machine learning,
 - [MyPy Python Type Checker](notebooks/programming/my_py.ipynb) [[1](http://mypy-lang.org/)]
 - [Python Base64 Encode/Decode & PIL](notebooks/programming/py_base64.ipynb)
 - [Python Args & Kwargs](notebooks/programming/args_kwargs.ipynb) [[1](https://youtu.be/gZB_ENJD34E)]
-- [Python LoggingGNSuvU)]
+- [Python Logging](notebooks/programming/python_logging.ipynb)
 - [SQL in the Jupyter Notebook](notebooks/programming/ipython_sql.ipynb)
 - [Cython: Compiling Python](notebooks/programming/cy_py.ipynb)
 
