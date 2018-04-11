@@ -23,6 +23,9 @@ I also have some reference materials I've contributed to my company's [GitHub re
     - [Sklearn regression, SVM & pickling with share market data](notebooks/practical_ml/practical_ml_1.ipynb)
     - [Implementing regression from scratch](notebooks/practical_ml/practical_ml_2.ipynb)
     - [Unsupervised Machine Learning: k-means & mean-shift](notebooks/practical_ml/unsupervised_ml.ipynb) [[1](https://pythonprogramming.net/flat-clustering-machine-learning-python-scikit-learn/)]
+    
+- Supervised
+    - [Supervised Learning in Python DataCamp](notebookss/supervised/supervised-learning-in-python.ipynb)[[1](https://campus.datacamp.com/courses/supervised-learning-with-scikit-learn)]
 
 - Unsupervised
     - [Visualising High Dimensional Datasets with PCA and T-SNE](notebooks/unsupervised/visualising-high-dim-datasets-pca-tsne.ipynb) [[1](https://medium.com/@luckylwk/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b)]
