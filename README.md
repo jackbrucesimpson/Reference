@@ -26,6 +26,7 @@ I also have some reference materials I've contributed to my company's [GitHub re
     
 - Supervised
     - [Supervised Learning in Python DataCamp](notebooks/supervised/supervised-learning-in-python.ipynb) [[1](https://campus.datacamp.com/courses/supervised-learning-with-scikit-learn)]
+    - [School Budgets Classification DataCamp](notebooks/supervised/school-budgets.ipynb) [[1](https://www.datacamp.com/courses/machine-learning-with-the-experts-school-budgets)]
 
 - Unsupervised
     - [Visualising High Dimensional Datasets with PCA and T-SNE](notebooks/unsupervised/visualising-high-dim-datasets-pca-tsne.ipynb) [[1](https://medium.com/@luckylwk/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b)]
