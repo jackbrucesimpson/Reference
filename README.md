@@ -50,7 +50,7 @@ I also have some reference materials I've contributed to my company's [GitHub re
 - Networks
     - [Networkx](notebooks/networks/intro_networks.ipynb) [[1](https://www.youtube.com/watch?v=nN84qeE0jtM), [2](https://www.youtube.com/watch?v=yMSCWLma46s&feature=youtu.be), [3](https://www.youtube.com/watch?v=1ErL1z_lKd8&feature=youtu.be)]
     - [Networks DataCamp 1](notebooks/networks/networks-datacamp-1.ipynb) [[1](https://www.datacamp.com/courses/network-analysis-in-python-part-1)]
-    - [Networks DataCamp 2](notebooks/networks/networks-datacamp-2.ipynb) [1](https://www.datacamp.com/courses/network-analysis-in-python-part-2)
+    - [Networks DataCamp 2](notebooks/networks/networks-datacamp-2.ipynb) [[1](https://www.datacamp.com/courses/network-analysis-in-python-part-2)]
 
 - NLP
     - [Machine Learning with Text: Sklearn & bag of words](notebooks/nlp/ml_text.ipynb) [[1](https://www.youtube.com/watch?v=vTaxdJ6VYWE)]
