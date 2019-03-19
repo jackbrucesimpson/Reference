@@ -72,6 +72,9 @@ I also have some reference materials I've contributed to my company's [GitHub re
 
 - Visualisation
     - [Bokeh DataCamp](notebooks/visualisation/bokeh_datacamp.ipynb)
+    
+- Spatial
+    - [Visualising Geospatial data in Python DataCamp](notebooks/spatial/intro_geospatial)
 
 
 ### Programming
