@@ -39,7 +39,10 @@ I also have some reference materials I've contributed to my company's [GitHub re
     - [Extreme Gradient Boosting with XGBoost DataCamp](notebooks/ensemble/extreme_xgboost.ipynb)
 
 - Deep learning
-    - [DataCamp Deep Learning](notebooks/deep_learning/deeplearning-datacamp.ipynb)
+    - [DataCamp Deep Learning](notebooks/deep_learning/deeplearning-datacamp.ipynb) [[1](https://www.datacamp.com/courses/deep-learning-in-python)]
+    - [DataCamp Pytorch](notebooks/deep_learning/pytorch_datacamp.ipynb) [[1](https://www.datacamp.com/courses/introduction-to-deep-learning-with-pytorch)]
+    - [PythonProgramming Pytorch](notebooks/deep_learning/pytorch_pythonprogramming.ipynb) [[1](https://pythonprogramming.net/introduction-deep-learning-neural-network-pytorch/)]
+    - [PythonProgramming Keras Tensorflow](notebooks/deep_learning/keras_tensorflow_pythonprogramming.ipynb) [[1](https://pythonprogramming.net/introduction-deep-learning-python-tensorflow-keras/)]
     - [Intro to Keras with diabetes dataset and saving models](notebooks/deep_learning/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/), [3](http://machinelearningmastery.com/save-load-keras-deep-learning-models/), [4](http://machinelearningmastery.com/5-step-life-cycle-neural-network-models-keras/), [5](http://machinelearningmastery.com/build-multi-layer-perceptron-neural-network-models-keras/)]
     - [Intro to Keras with MNIST](/notebooks/deep_learning/intro_keras_mnist.ipynb) [[1](https://elitedatascience.com/keras-tutorial-deep-learning-in-python), [2](http://www.pyimagesearch.com/2016/08/01/lenet-convolutional-neural-network-in-python/)]
     - [Using Keras to solve MNIST](/notebooks/deep_learning/keras_solve_mnist.ipynb) [[1](http://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/), [2](http://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/)]
@@ -58,7 +61,6 @@ I also have some reference materials I've contributed to my company's [GitHub re
 
 - Statistics
     - [Bayes Made Simple](notebooks/statistics/bayes_simple.ipynb) [[1](https://www.youtube.com/watch?v=6GV5bTCLC8g), [2](http://greenteapress.com/wp/think-bayes/), [3](https://www.analyticsvidhya.com/blog/2016/06/bayesian-statistics-beginners-simple-english/), [4](https://www.springboard.com/blog/probability-bayes-theorem-data-science/)]
-    - [Monte Carlo Simulation with Python](notebooks/statistics/monte_carlo_intro.ipynb) [[1](https://pythonprogramming.net/monte-carlo-simulator-python/)]
     
 - Time Series
     - [Introduction to Time Series Analysis in Python DataCamp](notebooks/time_series/intro_time_series_datacamp.ipynb) [[1](https://campus.datacamp.com/courses/introduction-to-time-series-analysis-in-python/)]
