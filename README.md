@@ -30,7 +30,7 @@ I also have some reference materials I've contributed to my company's [GitHub re
 
 - Unsupervised
     - [Visualising High Dimensional Datasets with PCA and T-SNE](notebooks/unsupervised/visualising-high-dim-datasets-pca-tsne.ipynb) [[1](https://medium.com/@luckylwk/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b)]
-    - [Unsupervised Learning in Python DataCamp]('notebooks/unsupervised/unsupervised_datacamp.ipynb') [[1](https://www.datacamp.com/courses/unsupervised-learning-in-python/)]
+    - [Unsupervised Learning in Python DataCamp](notebooks/unsupervised/unsupervised_datacamp.ipynb) [[1](https://www.datacamp.com/courses/unsupervised-learning-in-python/)]
 
 - Ensemble methods
     - [House Price Estimation](notebooks/ensemble/house_price_estimation.ipynb) [[1](https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471)]
@@ -74,7 +74,7 @@ I also have some reference materials I've contributed to my company's [GitHub re
     - [Bokeh DataCamp](notebooks/visualisation/bokeh_datacamp.ipynb)
     
 - Spatial
-    - [Visualising Geospatial data in Python DataCamp](notebooks/spatial/intro_geospatial)
+    - [Visualising Geospatial data in Python DataCamp](notebooks/spatial/intro_geospatial.ipynb)
 
 
 ### Programming
@@ -93,19 +93,3 @@ I also have some reference materials I've contributed to my company's [GitHub re
 - [Ubuntu setup](setup/ubuntu_setup.md)
 - [CUDA, cuDNN, TensorFlow, and Keras Setup on Ubuntu 16.04](setup/cuda_tf_setup.md)
 - [Setup Xcode Command Line Tools on macOS](setup/xcode_command_line.md)
-
-## Interesting Datasets
-- [3 Million Instacart Orders](https://tech.instacart.com/3-million-instacart-orders-open-sourced-d40d29ead6f2)
-- [NSW land valuations](http://www.valuergeneral.nsw.gov.au/land_value_summaries/lv.php)
-- [WalMart: Sales by department for 40 stores](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting)
-- [Amazon product review data](http://jmcauley.ucsd.edu/data/amazon/)
-- [Wikipedia Traffic Statistics V2](https://aws.amazon.com/datasets/wikipedia-traffic-statistics-v2/)
-- [Common Crawl: A corpus of web crawl data composed of over 5 billion web pages](https://aws.amazon.com/public-datasets/common-crawl/)
-- [Amazon Bin Image Dataset: Over 500,000 bin JPEG images and corresponding JSON metadata files describing products in an operating Amazon Fulfillment Center](https://aws.amazon.com/public-datasets/amazon-bin-images/)
-- [GDELT: Over a quarter-billion records monitoring the world's broadcast, print, and web news from nearly every corner of every country, updated daily](https://aws.amazon.com/public-datasets/gdelt/)
-- [Multimedia Commons: A collection of nearly 100M images and videos with audio and visual features and annotations](https://aws.amazon.com/public-datasets/multimedia-commons/)
-- [Google Books Ngrams: A dataset containing Google Books n-gram corpuses](https://aws.amazon.com/datasets/google-books-ngrams/)
-- [SpaceNet on AWS: A corpus of commercial satellite imagery and labeled training data to foster innovation in the development of computer vision algorithms](https://aws.amazon.com/public-datasets/spacenet/)
-- [Predict Product Backorders](https://www.kaggle.com/tiredgeek/predict-bo-trial)
-- [Boston Housing Dataset](https://www.kaggle.com/heptapod/uci-ml-datasets)
-- [E-Commerce Data](https://www.kaggle.com/carrie1/ecommerce-data)
