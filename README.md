@@ -78,6 +78,8 @@ I also have some reference materials I've contributed to my company's [GitHub re
 - Spatial
     - [Visualising Geospatial data in Python DataCamp](notebooks/spatial/intro_geospatial.ipynb)
 
+- Images
+    - [Visualising Geospatial data in Python DataCamp](notebooks/image/biomed_image_datacamp.ipynb)[[1](https://www.datacamp.com/courses/biomedical-image-analysis-in-python)]
 
 ### Programming
 - [Web Scraping with Beautiful Soup](notebooks/programming/beautiful_soup.ipynb) [[1](https://www.dataquest.io/blog/web-scraping-tutorial-python/)]
