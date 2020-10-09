@@ -65,8 +65,12 @@ I also have some reference materials I've contributed to my company's [GitHub re
 - Time Series
     - [Introduction to Time Series Analysis in Python DataCamp](notebooks/time_series/intro_time_series_datacamp.ipynb) [[1](https://campus.datacamp.com/courses/introduction-to-time-series-analysis-in-python/)]
 
-- Spark
-    - [PySpark DataCamp](notebooks/spark/datacamp-spark.ipynb)
+- Big Data
+    - [Dask DataCamp](notebooks/bigdata/datacamp-dask.ipynb)[[1](https://learn.datacamp.com/courses/parallel-computing-with-dask)]
+    - [PySpark DataCamp](notebooks/bigdata/datacamp-spark.ipynb)[[1](https://learn.datacamp.com/courses/introduction-to-pyspark)]
+    
+- Optimization
+    - [DataCamp Supply Chain Analytics](notebooks/optimization/datacamp-supply-chain.ipynb)[[1](https://learn.datacamp.com/courses/supply-chain-analytics-in-python)]
 
 - SQL
     - [SQL Reference](notebooks/programming/sql_reference.ipynb) [[1](https://code.tutsplus.com/articles/sql-for-beginners--net-8200)]
@@ -80,6 +84,9 @@ I also have some reference materials I've contributed to my company's [GitHub re
 
 - Images
     - [Visualising Geospatial data in Python DataCamp](notebooks/image/biomed_image_datacamp.ipynb)[[1](https://www.datacamp.com/courses/biomedical-image-analysis-in-python)]
+    
+- Linear Optimization
+    - [Supply Chain Analytics in Python DataCamp](notebooks/optimization/supply_chain_optimization_datacamp.ipynb)[[1](https://learn.datacamp.com/courses/supply-chain-analytics-in-python)]
 
 ### Programming
 - [Web Scraping with Beautiful Soup](notebooks/programming/beautiful_soup.ipynb) [[1](https://www.dataquest.io/blog/web-scraping-tutorial-python/)]
