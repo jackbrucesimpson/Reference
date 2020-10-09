@@ -70,7 +70,7 @@ I also have some reference materials I've contributed to my company's [GitHub re
     - [PySpark DataCamp](notebooks/bigdata/datacamp-spark.ipynb) [[1](https://learn.datacamp.com/courses/introduction-to-pyspark)]
     
 - Optimization
-    - [DataCamp Supply Chain Analytics](notebooks/optimization/supply_chain_optimization_datacamp.ipynb)[[1](https://learn.datacamp.com/courses/supply-chain-analytics-in-python)]
+    - [DataCamp Supply Chain Analytics](notebooks/optimization/supply_chain_optimization_datacamp.ipynb) [[1](https://learn.datacamp.com/courses/supply-chain-analytics-in-python)], [[2](https://brilliant.org/wiki/linear-programming/?fbclid=IwAR3pv1NHY5tgHClbcsEG0qGbJTgKQFaXbdX6A35O9jA4FNigAbhnUObxwPk)]
 
 - SQL
     - [SQL Reference](notebooks/programming/sql_reference.ipynb) [[1](https://code.tutsplus.com/articles/sql-for-beginners--net-8200)]
@@ -87,6 +87,7 @@ I also have some reference materials I've contributed to my company's [GitHub re
     
 - Linear Optimization
     - [Supply Chain Analytics in Python DataCamp](notebooks/optimization/supply_chain_optimization_datacamp.ipynb) [[1](https://learn.datacamp.com/courses/supply-chain-analytics-in-python)]
+    - [Linear Optimization of Ted Talks](notebooks/optimization/linear_optimization_ted.ipynb) [[1](https://www.analyticsvidhya.com/blog/2017/10/linear-optimization-in-python/)]
 
 ### Programming
 - [Web Scraping with Beautiful Soup](notebooks/programming/beautiful_soup.ipynb) [[1](https://www.dataquest.io/blog/web-scraping-tutorial-python/)]
