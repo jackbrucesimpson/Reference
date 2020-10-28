@@ -40,7 +40,8 @@ I also have some reference materials I've contributed to my company's [GitHub re
 
 - Deep learning
     - [DataCamp Deep Learning](notebooks/deep_learning/deeplearning-datacamp.ipynb) [[1](https://www.datacamp.com/courses/deep-learning-in-python)]
-    - [DataCamp Pytorch](notebooks/deep_learning/pytorch_datacamp.ipynb) [[1](https://www.datacamp.com/courses/introduction-to-deep-learning-with-pytorch)]
+    - [DataCamp Intro to Deep Learning with Keras](notebooks/deep_learning/intro-deeplearning-keras-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/deep-learning-with-keras-in-python)]
+    - [DataCamp Pytorch](notebooks/deep_learning/pytorch-datacamp.ipynb) [[1](https://www.datacamp.com/courses/introduction-to-deep-learning-with-pytorch)]
     - [PythonProgramming Pytorch](notebooks/deep_learning/pytorch_pythonprogramming.ipynb) [[1](https://pythonprogramming.net/introduction-deep-learning-neural-network-pytorch/)]
     - [PythonProgramming Keras Tensorflow](notebooks/deep_learning/keras_tensorflow_pythonprogramming.ipynb) [[1](https://pythonprogramming.net/introduction-deep-learning-python-tensorflow-keras/)]
     - [Intro to Keras with diabetes dataset and saving models](notebooks/deep_learning/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/), [3](http://machinelearningmastery.com/save-load-keras-deep-learning-models/), [4](http://machinelearningmastery.com/5-step-life-cycle-neural-network-models-keras/), [5](http://machinelearningmastery.com/build-multi-layer-perceptron-neural-network-models-keras/)]
