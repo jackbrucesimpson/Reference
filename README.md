@@ -40,7 +40,10 @@ I also have some reference materials I've contributed to my company's [GitHub re
 
 - Deep learning
     - [DataCamp Deep Learning](deep_learning/deeplearning-datacamp.ipynb) [[1](https://www.datacamp.com/courses/deep-learning-in-python)]
+    - [DataCamp Introduction to TensorFlow in Python](deep_learning/intro-tensorflow-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/introduction-to-tensorflow-in-python)]
     - [DataCamp Intro to Deep Learning with Keras](deep_learning/intro-deeplearning-keras-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/deep-learning-with-keras-in-python)]
+    - [DataCamp Image Processing with Keras in Python](deep_learning/image-processing-keras-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/image-processing-with-keras-in-python)]
+    - [DataCamp Advanced Deep Learning with Keras](deep_learning/advanced-keras-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/advanced-deep-learning-with-keras)]
     - [DataCamp Pytorch](deep_learning/pytorch-datacamp.ipynb) [[1](https://www.datacamp.com/courses/introduction-to-deep-learning-with-pytorch)]
     - [PythonProgramming Pytorch](deep_learning/pytorch_pythonprogramming.ipynb) [[1](https://pythonprogramming.net/introduction-deep-learning-neural-network-pytorch/)]
     - [PythonProgramming Keras Tensorflow](deep_learning/keras_tensorflow_pythonprogramming.ipynb) [[1](https://pythonprogramming.net/introduction-deep-learning-python-tensorflow-keras/)]
