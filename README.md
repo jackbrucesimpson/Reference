@@ -6,6 +6,27 @@ I also have some reference materials I've contributed to my company's [GitHub re
 ## Notebooks
 
 ### Data Analysis
+- Deep learning
+    - [DataCamp Deep Learning](deep_learning/deeplearning-datacamp.ipynb) [[1](https://www.datacamp.com/courses/deep-learning-in-python)]
+    - [DataCamp Introduction to TensorFlow in Python](deep_learning/intro-tensorflow-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/introduction-to-tensorflow-in-python)]
+    - [DataCamp Intro to Deep Learning with Keras](deep_learning/intro-deeplearning-keras-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/deep-learning-with-keras-in-python)]
+    - [DataCamp Image Processing with Keras in Python](deep_learning/image-processing-keras-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/image-processing-with-keras-in-python)]
+    - [DataCamp Advanced Deep Learning with Keras](deep_learning/advanced-keras-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/advanced-deep-learning-with-keras)]
+    - [DataCamp Pytorch](deep_learning/pytorch-datacamp.ipynb) [[1](https://www.datacamp.com/courses/introduction-to-deep-learning-with-pytorch)]
+    - [PythonProgramming Pytorch](deep_learning/pytorch_pythonprogramming.ipynb) [[1](https://pythonprogramming.net/introduction-deep-learning-neural-network-pytorch/)]
+    - [PythonProgramming Keras Tensorflow](deep_learning/keras_tensorflow_pythonprogramming.ipynb) [[1](https://pythonprogramming.net/introduction-deep-learning-python-tensorflow-keras/)]
+    - [Intro to Keras with diabetes dataset and saving models](deep_learning/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/), [3](http://machinelearningmastery.com/save-load-keras-deep-learning-models/), [4](http://machinelearningmastery.com/5-step-life-cycle-neural-network-models-keras/), [5](http://machinelearningmastery.com/build-multi-layer-perceptron-neural-network-models-keras/)]
+    - [Intro to Keras with MNIST](deep_learning/intro_keras_mnist.ipynb) [[1](https://elitedatascience.com/keras-tutorial-deep-learning-in-python), [2](http://www.pyimagesearch.com/2016/08/01/lenet-convolutional-neural-network-in-python/)]
+    - [Using Keras to solve MNIST](deep_learning/keras_solve_mnist.ipynb) [[1](http://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/), [2](http://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/)]
+    - [Regression Tutorial with the Keras](deep_learning/keras_regression_tutorial.ipynb) [[1](http://machinelearningmastery.com/regression-tutorial-keras-deep-learning-library-python/)]
+    - [Keras Multi-Class Classification on Iris Dataset]deep_learning/keras_iris_tutorial.ipynb) [[1](http://machinelearningmastery.com/multi-class-classification-tutorial-keras-deep-learning-library/)]
+    - [Binary classification of sonar data using Keras](deep_learning/binary_classification_keras_sonar.ipynb) [[1](http://machinelearningmastery.com/binary-classification-tutorial-with-the-keras-deep-learning-library/)]
+
+- Networks
+    - [Networkx](networks/intro_networks.ipynb) [[1](https://www.youtube.com/watch?v=nN84qeE0jtM), [2](https://www.youtube.com/watch?v=yMSCWLma46s&feature=youtu.be), [3](https://www.youtube.com/watch?v=1ErL1z_lKd8&feature=youtu.be)]
+    - [Networks DataCamp 1](networks/networks-datacamp-1.ipynb) [[1](https://www.datacamp.com/courses/network-analysis-in-python-part-1)]
+    - [Networks DataCamp 2](networks/networks-datacamp-2.ipynb) [[1](https://www.datacamp.com/courses/network-analysis-in-python-part-2)]
+
 - Machine Learning Recipes [[1](https://www.youtube.com/playlist?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal)]
     - [Decision Trees and visualising decisions](recipes/ml_recipes_1.ipynb)
     - [Implementing KNN and Euclidean distance from scratch](recipes/ml_recipes_2.ipynb)
@@ -37,27 +58,6 @@ I also have some reference materials I've contributed to my company's [GitHub re
     - [Tour of ensemble methods](ensemble/intro_ensemble.ipynb) [[1](https://machinelearningmastery.com/)]
     - [XGBoost Machine Learning Mastery](ensemble/intro_xgboost.ipynb) [[1](https://machinelearningmastery.com/)]
     - [Extreme Gradient Boosting with XGBoost DataCamp](ensemble/extreme_xgboost.ipynb)
-
-- Deep learning
-    - [DataCamp Deep Learning](deep_learning/deeplearning-datacamp.ipynb) [[1](https://www.datacamp.com/courses/deep-learning-in-python)]
-    - [DataCamp Introduction to TensorFlow in Python](deep_learning/intro-tensorflow-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/introduction-to-tensorflow-in-python)]
-    - [DataCamp Intro to Deep Learning with Keras](deep_learning/intro-deeplearning-keras-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/deep-learning-with-keras-in-python)]
-    - [DataCamp Image Processing with Keras in Python](deep_learning/image-processing-keras-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/image-processing-with-keras-in-python)]
-    - [DataCamp Advanced Deep Learning with Keras](deep_learning/advanced-keras-datacamp.ipynb) [[1](https://learn.datacamp.com/courses/advanced-deep-learning-with-keras)]
-    - [DataCamp Pytorch](deep_learning/pytorch-datacamp.ipynb) [[1](https://www.datacamp.com/courses/introduction-to-deep-learning-with-pytorch)]
-    - [PythonProgramming Pytorch](deep_learning/pytorch_pythonprogramming.ipynb) [[1](https://pythonprogramming.net/introduction-deep-learning-neural-network-pytorch/)]
-    - [PythonProgramming Keras Tensorflow](deep_learning/keras_tensorflow_pythonprogramming.ipynb) [[1](https://pythonprogramming.net/introduction-deep-learning-python-tensorflow-keras/)]
-    - [Intro to Keras with diabetes dataset and saving models](deep_learning/keras_intro.ipynb) [[1](http://machinelearningmastery.com/introduction-python-deep-learning-library-keras/), [2](http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/), [3](http://machinelearningmastery.com/save-load-keras-deep-learning-models/), [4](http://machinelearningmastery.com/5-step-life-cycle-neural-network-models-keras/), [5](http://machinelearningmastery.com/build-multi-layer-perceptron-neural-network-models-keras/)]
-    - [Intro to Keras with MNIST](deep_learning/intro_keras_mnist.ipynb) [[1](https://elitedatascience.com/keras-tutorial-deep-learning-in-python), [2](http://www.pyimagesearch.com/2016/08/01/lenet-convolutional-neural-network-in-python/)]
-    - [Using Keras to solve MNIST](deep_learning/keras_solve_mnist.ipynb) [[1](http://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/), [2](http://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/)]
-    - [Regression Tutorial with the Keras](deep_learning/keras_regression_tutorial.ipynb) [[1](http://machinelearningmastery.com/regression-tutorial-keras-deep-learning-library-python/)]
-    - [Keras Multi-Class Classification on Iris Dataset]deep_learning/keras_iris_tutorial.ipynb) [[1](http://machinelearningmastery.com/multi-class-classification-tutorial-keras-deep-learning-library/)]
-    - [Binary classification of sonar data using Keras](deep_learning/binary_classification_keras_sonar.ipynb) [[1](http://machinelearningmastery.com/binary-classification-tutorial-with-the-keras-deep-learning-library/)]
-
-- Networks
-    - [Networkx](networks/intro_networks.ipynb) [[1](https://www.youtube.com/watch?v=nN84qeE0jtM), [2](https://www.youtube.com/watch?v=yMSCWLma46s&feature=youtu.be), [3](https://www.youtube.com/watch?v=1ErL1z_lKd8&feature=youtu.be)]
-    - [Networks DataCamp 1](networks/networks-datacamp-1.ipynb) [[1](https://www.datacamp.com/courses/network-analysis-in-python-part-1)]
-    - [Networks DataCamp 2](networks/networks-datacamp-2.ipynb) [[1](https://www.datacamp.com/courses/network-analysis-in-python-part-2)]
 
 - NLP
     - [Machine Learning with Text: Sklearn & bag of words](nlp/ml_text.ipynb) [[1](https://www.youtube.com/watch?v=vTaxdJ6VYWE)]
