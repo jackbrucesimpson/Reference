@@ -22,6 +22,9 @@ I also have some reference materials I've contributed to my company's [GitHub re
     - [Keras Multi-Class Classification on Iris Dataset]deep_learning/keras_iris_tutorial.ipynb) [[1](http://machinelearningmastery.com/multi-class-classification-tutorial-keras-deep-learning-library/)]
     - [Binary classification of sonar data using Keras](deep_learning/binary_classification_keras_sonar.ipynb) [[1](http://machinelearningmastery.com/binary-classification-tutorial-with-the-keras-deep-learning-library/)]
 
+- Reinforcement Learning
+    - [Q-Learning Reinforcement Learning with PythonProgramming](reinforcement/pythonprogramming/) [[1](https://pythonprogramming.net/q-learning-reinforcement-learning-python-tutorial/)]
+
 - Networks
     - [Networkx](networks/intro_networks.ipynb) [[1](https://www.youtube.com/watch?v=nN84qeE0jtM), [2](https://www.youtube.com/watch?v=yMSCWLma46s&feature=youtu.be), [3](https://www.youtube.com/watch?v=1ErL1z_lKd8&feature=youtu.be)]
     - [Networks DataCamp 1](networks/networks-datacamp-1.ipynb) [[1](https://www.datacamp.com/courses/network-analysis-in-python-part-1)]
@@ -77,9 +80,14 @@ I also have some reference materials I've contributed to my company's [GitHub re
     - [Supply Chain Analytics in Python DataCamp](optimization/supply_chain_optimization_datacamp.ipynb) [[1](https://learn.datacamp.com/courses/supply-chain-analytics-in-python)]
     - [Linear Optimization of Ted Talks](optimization/linear_optimization_ted.ipynb) [[1](https://www.analyticsvidhya.com/blog/2017/10/linear-optimization-in-python/)]
 
+- R
+    - [SQL Reference](R/sql_reference.ipynb) [[1](https://code.tutsplus.com/articles/sql-for-beginners--net-8200)]
+    - [SQL in the Jupyter Notebook](R/ipython_sql.ipynb)
+
 - SQL
-    - [SQL Reference](programming/sql_reference.ipynb) [[1](https://code.tutsplus.com/articles/sql-for-beginners--net-8200)]
-    - [SQL in the Jupyter Notebook](programming/ipython_sql.ipynb)
+    - [Introduction to the Tidyverse DataCamp](R/intro_tidyverse.R) [[1](https://www.datacamp.com/courses/introduction-to-the-tidyverse)]
+    - 
+    - [Joe's tutorial notes: covers tidyverse, figures, dates](R/joe_tutorial.R)
 
 - Visualisation
     - [Bokeh DataCamp](visualisation/bokeh_datacamp.ipynb)

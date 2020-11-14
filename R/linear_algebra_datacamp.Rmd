@@ -1,0 +1,64 @@
+---
+title: "Linear Algebra Datacamp"
+output: html_notebook
+---
+
+### Creating Vectors in R
+Vectors can be analyzed in a few different ways in R.
+
+One way is to create the vector yourself, and there are a few different means by which you can do this.
+
+The rep() command in R creates a vector that repeats the same element a prescribed number of times, while the seq() command creates a vector that follows a prescribed pattern.
+
+A vector can be manually created by using the c() command, which stands for "concatenate".
+
+```{r}
+# Creating three 3's and four 4's, respectively
+rep(3, 3)
+rep(4, 4)
+
+# Creating a vector with the first three even numbers and the first three odd numbers
+seq(2, 6, by = 2)
+seq(1, 5, by = 2)
+
+# Re-creating the previous four vectors using the 'c' command
+c(3, 3, 3)
+c(4, 4, 4, 4)
+
+c(2, 4, 6)
+c(1, 3, 5)
+```
+
+### Creating Matrices in R
+Matrices can be created and analyzed in a few different ways in R.
+
+One way is to create the matrix yourself. There are a few different ways you can do this.
+
+The matrix(a, nrow = b, ncol = c) command in R creates a matrix that repeats the element a in a matrix with b rows and c columns.
+
+A matrix can be manually created by using the c() command as well.
+
+```{r}
+# Create a matrix of all 1's and all 2's that are 2 by 3 and 3 by 2, respectively
+matrix(1, nrow = 2, ncol = 3)
+
+print(matrix(2, nrow = 3, ncol = 2))
+
+# Create a matrix B and changing the byrow designation.
+B <- matrix(c(1, 2, 3, 2), nrow = 2, ncol = 2, byrow = FALSE)
+B <- matrix(c(1, 2, 3, 2), nrow = 2, ncol = 2, byrow = TRUE)
+
+# Add A to the previously-created matrix B
+A + B
+```
+Matrix Multiplication as a Transformation
+Matrices can be viewed as a way to transform collections of vectors into other vectors.
+
+These transformations can take many forms, but the simplest ones in two dimensions are stretches or shrinkages (in either coordinate), reflections (e.g. about the x-axis, y-axis, origin, the line y = x), and rotations (clockwise, counter-clockwise).
+
+Multiplication of a vector by a matrix is accomplished using the %*% command.
+
+```{r}
+
+```
+

@@ -98,3 +98,7 @@ ENV/
 
 # VSCode
 .VSCode/
+.Rproj.user
+
+*.nb.html
+R.Rproj
