@@ -3,9 +3,526 @@ title: "Spatial Analysis with sf and raster in R"
 output: html_notebook
 ---
 
+### Reading vector data
+The sf package, created by Edzer Pebesma and colleagues, has dramatically simplified reading vector spatial data into R.
 
+In this exercise you will read in three shapefiles (one point file and two polygon files) using st_read(). If you've read in the files correctly, you will see a standard R data frame except it will show some header metadata about the file and you'll see a special geometry column which we will discuss later.
 
 ```{r}
+# Load the sf package
+library(sf)
 
+# Read in the trees shapefile
+trees <- st_read("trees.shp")
+
+# Read in the neighborhood shapefile
+neighborhoods <- st_read("neighborhoods.shp")
+
+# Read in the parks shapefile
+parks <- st_read("parks.shp")
+
+# View the first few trees
+head(trees)
 ```
+
+### Reading raster data
+The term "raster" refers to gridded data that can include satellite imagery, aerial photographs (like orthophotos) and other types. In R, raster data can be handled using the raster package created by Robert J. Hijmans.
+
+When working with raster data, one of the most important things to keep in mind is that the raw data can be what is known as "single-band" or "multi-band" and these are handled a little differently in R. Single-band rasters are the simplest, these have a single layer of raster values -- a classic example would be an elevation raster where each cell value represents the elevation at that location.
+
+Multi-band rasters will have more than one layer. An example is a color aerial photo in which there would be one band each representing red, green or blue light.
+
+```{r}
+# Load the raster package
+library(raster)
+
+# Read in the tree canopy single-band raster
+canopy <- raster('canopy.tif')
+
+# Read in the manhattan Landsat image multi-band raster
+manhattan <- brick("manhattan.tif")
+
+# Get the class for the new objects
+class(canopy)
+class(manhattan)
+
+# Identify how many layers each object has
+nlayers(canopy)
+nlayers(manhattan)
+```
+
+### sf objects are data frames
+As mentioned in the video, spatial objects in sf are just data frames with some special properties. This means that packages like dplyr can be used to manipulate sf objects. In this exercise, you will use the dplyr functions select() to select or drop variables, filter() to filter the data and mutate() to add or alter columns.
+
+We will also use the pipe operator (%>%) to save us some typing and simplify our code. If you're not familiar with the pipe, just think of it as the joints between an R workflow (pipeline) taking the result from the left hand side and sending it on to the next function. For example:
+
+```{r}
+1:10 %>% mean %>% log
+```
+
+will create a vector 1 to 10 and "pipe" it over to the mean() function, then it will pipe this result to the log() function (the result in this case is 1.704748).
+
+To learn more you can check out the course Data Manipulation in R with dplyr.
+
+```{r}
+# Load the sf package
+library(sf)
+
+# ... and the dplyr package
+library(dplyr)
+
+# Read in the trees shapefile
+trees <- st_read("trees.shp")
+
+# Use filter() to limit to honey locust trees
+honeylocust <- trees %>% filter(species == "honeylocust")
+
+# Count the number of rows
+nrow(honeylocust)
+
+# Limit to tree_id and boroname variables
+honeylocust_lim <- honeylocust %>% select(tree_id, boroname) 
+
+# Use head() to look at the first few records
+head(honeylocust_lim)
+```
+
+### Geometry is stored in list-columns
+A major innovation in sf is that spatial objects are data frames. This is possible thanks, in part, to the list-column.
+
+A list-column behaves, to a certain extent, like any other R column. The main difference is that instead of a standard value such as a single number, character or boolean value, each observation value in that column is a piece of an R list and this list can be as complex as needed. The list column allows you to store far more information in a single variable and sf takes advantage of this by storing all geographic information for each feature in the list.
+
+In this exercise, you will convert the data frame to what's called a tibble with tibble::as_tibble() (Note that dplyr::tbl_df() is now deprecated).
+
+```{r}
+# Create a standard, non-spatial data frame with one column
+df <- data.frame(a = 1:3)
+
+# Add a list column to your data frame
+df$b <- list(1:4, 1:5, 1:10)
+
+# Look at your data frame with head
+head(df)
+
+# Convert your data frame to a tibble and print on console
+as_tibble(df)
+
+# Pull out the third observation from both columns individually
+df$a[3]
+df$b[3]
+```
+
+### Extracting geometric information from your vector layers
+There are several functions in sf that allow you to access geometric information like area from your vector features. For example, the functions st_area() and st_length() return the area and length of your features, respectively.
+
+Note that the result of functions like st_area() and st_length() will not be a traditional vector. Instead the result has a class of units which means the vector result is accompanied by metadata describing the object's units.
+
+```{r}
+# This will not work
+result <- st_area(parks)
+result > 30000
+
+# Instead you need to either remove the units with unclass():
+
+# This will work
+val <- 30000
+unclass(result) > val
+
+# or you need to convert val's class to units, for example:
+# This will work
+units(val) <- units(result)
+result > val
+
+# Read in the parks shapefile
+parks <- st_read("parks.shp")
+
+# Compute the areas of the parks
+areas <- st_area(parks)
+
+# Create a quick histogram of the areas using hist
+hist(areas, xlim = c(0, 200000), breaks = 1000)
+
+# Filter to parks greater than 30000 (square meters)
+big_parks <- parks %>% filter(unclass(areas) > 30000)
+
+# Plot just the geometry of big_parks
+plot(st_geometry(big_parks))
+```
+
+### First look at plotting vector spatial objects
+The function for making a quick map/plot is a function you are already familiar with, plot(). You can, for example, type plot(my_data) to see your spatial object. The default, though, may not be what you want. The plot() function, when applied to sf objects, will create a set of maps, one for each attribute in your data. Instead, if you want to create a map of a single attribute you can extract that attribute using, as an example, plot(my_data["my_variable"]).
+
+Frequently you just want to plot the raw geometry with no attribute color-coding (e.g., adding county boundaries to a map of points). For this, you can use the st_geometry() function to extract the geometry and plot the result. You can either create a new object or you can nest st_geometry() within the plot() function.
+
+```{r}
+# Plot the parks object using all defaults
+plot(parks)
+
+# Plot just the acres attribute of the parks data
+plot(parks["acres"])
+
+# Create a new object of just the parks geometry
+parks_geo <- st_geometry(parks)
+
+# Plot the geometry of the parks data
+plot(parks_geo)
+```
+
+### Learning about your raster objects
+Instead of storing raster objects in data frames, the raster package stores spatial data in specially designed R classes that contain slots where the data and metadata are stored. The data and metadata can be accessed using a suite of functions. For example, the spatial extent (the bounding box) of the object can be accessed with extent(), the coordinate reference system can be accessed with crs() and the number of grid cells can be determined with ncell().
+
+```{r}
+# Load the raster package
+library(raster)
+
+# Read in the rasters
+canopy <- raster("canopy.tif")
+manhattan <- brick("manhattan.tif")
+
+# Get the extent of the canopy object
+extent(canopy)
+
+# Get the CRS of the manhattan object
+crs(manhattan)
+
+# Determine the number of grid cells in both raster objects
+ncell(manhattan)
+ncell(canopy)
+```
+
+### Accessing raster data values
+Raster data can be very big depending on the extent and resolution (grid size). In order to deal with this the raster() and brick() functions are designed to only read in the actual raster values as needed. To show that this is true, you can use the inMemory() function on an object and it will return FALSE if the values are not in memory. If you use the head() function, the raster package will read in only the values needed, not the full set of values. The raster values will be read in by default if you perform spatial analysis operations that require it or you can read in the values from a raster manually with the function getValues().
+
+```{r}
+# Check if the data is in memory
+inMemory(canopy)
+
+# Use head() to peak at the first few records
+head(canopy)
+
+# Use getValues() to read the values into a vector
+vals <- getValues(canopy)
+
+# Use hist() to create a histogram of the values
+hist(vals)
+```
+
+### Plot your raster object
+Similar to what you saw in the exercises related to vector objects it's often useful to quickly look at a map of your raster objects with the plot() function.
+
+The raster package has added useful methods for plotting both single and multi-band rasters. For single-band rasters or for a map of each layer in a multi-band raster you can simply use plot(). If you have a multi-band raster with layers for red, green and blue light you can use the plotRGB() function to plot the raster layers together as a single image.
+
+```{r}
+# Plot the canopy raster (single raster)
+plot(canopy)
+
+# Plot the manhattan raster (as a single image for each layer)
+plot(manhattan)
+
+# Plot the manhattan raster as an image
+plotRGB(manhattan)
+```
+
+### Vector and raster coordinate systems
+In order to perform any spatial analysis with more than one layer, your layers should share the same coordinate reference system (CRS) and the first step is determining what coordinate reference system your data has. To do this you can make use of the sf function st_crs() and the raster function crs().
+
+When the geographic data you read in with sf already has a CRS defined both sf and raster will recognize and retain it. When the CRS is not defined you will need to define it yourself using either the EPSG number or the proj4string.
+
+```{r}
+# Determine the CRS for the neighborhoods and trees vector objects
+st_crs(neighborhoods)
+st_crs(trees)
+
+# Assign the CRS to trees
+crs_1 <- "+proj=longlat +ellps=WGS84 +no_defs"
+st_crs(trees) <- crs_1
+
+# Determine the CRS for the canopy and manhattan rasters
+crs(canopy)
+crs(manhattan)
+
+# Assign the CRS to manhattan
+crs_2 <- "+proj=utm +zone=18 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
+crs(manhattan) <- crs_2
+```
+
+### Transform your layers to a common CRS
+In the previous exercise, when you ran st_crs() and crs() you may have noticed that the CRS' were different for the different layers. The vector layer's CRS began with +proj=longlat and the raster layer's began with +proj=utm or +proj=aea. In order to use these layers together in spatial analysis we will want them to have the same CRS.
+
+In this exercise you will transform (sometimes this is called "project") the objects so they share a single CRS. It is generally best to perform spatial analysis with layers that have a projected CRS (and some functions require this). To determine if your object has a projected CRS you can look at the first part of the result from st_crs() or crs() -- if it begins with +proj=longlat then your CRS is unprojected.
+
+Note that you will use method = "ngb" in your call to projectRaster() to prevent distortion in the manhattan image.
+
+```{r}
+# Get the CRS from the canopy object
+the_crs <- crs(canopy, asText = TRUE)
+
+# Project trees to match the CRS of canopy
+trees_crs <- st_transform(trees, crs = the_crs)
+
+# Project neighborhoods to match the CRS of canopy
+neighborhoods_crs <- st_transform(neighborhoods, crs = the_crs)
+
+# Project manhattan to match the CRS of canopy
+manhattan_crs <- projectRaster(manhattan, crs = the_crs, method = "ngb")
+
+# Look at the CRS to see if they match
+st_crs(trees_crs)
+st_crs(neighborhoods_crs)
+crs(manhattan_crs)
+```
+
+### Plot vector and raster together
+If the layers do not share a common CRS they may not align on a plot. To illustrate, in this exercise, you will initially create a plot with the plot() function and try to add two layers that do not share the same CRS. You will then transform one layer's CRS to match the other and you will plot this with both the plot() function and functions from the tmap package.
+
+Note that for this exercise we returned all the layers to their original CRS and did not retain the changes you made in the last exercise.
+
+With the plot() function you can plot multiple layers on the same map by calling plot() multiple times. You'll need to add the argument add = TRUE to all calls to plot() after the first one and you need to run the code for all layers at once rather than line-by-line.
+
+```{r}
+# Plot canopy and neighborhoods (run both lines together)
+# Do you see the neighborhoods?
+plot(canopy)
+plot(neighborhoods, add = TRUE)
+
+# See if canopy and neighborhoods share a CRS
+st_crs(neighborhoods)
+crs(canopy)
+
+# Save the CRS of the canopy layer
+the_crs <- crs(canopy, asText = TRUE)
+
+# Transform the neighborhoods CRS to match canopy
+neighborhoods_crs <- st_transform(neighborhoods, crs = the_crs)
+
+# Re-run plotting code (run both lines together)
+# Do the neighborhoods show up now?
+plot(canopy)
+plot(neighborhoods_crs, add = TRUE)
+
+# Simply run the tmap code
+tm_shape(canopy) + 
+    tm_raster() + 
+    tm_shape(neighborhoods_crs) + 
+    tm_polygons(alpha = 0.5)
+```
+
+### Dropping geometry from a data frame
+One of the great innovations of sf over sp is the use of data frames for storing spatial objects. This allows you to slice and dice your spatial data in the same way you do for non-spatial data. This means you can, for example, apply dplyr verbs directly to your sf object.
+
+One important difference between dplyr with and without spatial data is that the resulting data frames will include the geometry variable unless you explicitly drop it. If you want to force the geometry to be dropped you would use the sf function st_set_geometry() and you would set the geometry to NULL.
+
+```{r}
+ # Create a data frame of counts by species
+ # Use the dplyr function count() to tally the number of trees by species from the trees dataset
+species_counts <- count(trees, species, sort = TRUE)
+
+# Use head to see if the geometry column is in the data frame
+head(species_counts)
+
+# Drop the geometry column
+species_no_geometry <- st_set_geometry(species_counts, NULL)
+
+# Confirm the geometry column has been dropped
+head(species_no_geometry)
+```
+
+### Join spatial and non-spatial data
+In this exercise you will test joining spatial and non-spatial data. In particular, the trees data you have been working with has a full county name (the variable is called boroname) but does not have the county codes. The neighborhoods file has both a county name (the variable is called boro_name) and the county codes -- neighborhoods are nested within counties. In this exercise, you will create a non-spatial data frame of county name and county code from the neighborhoods object. Then you will join this data frame into the spatial trees object with inner_join().
+
+```{r}
+# Limit to the fields boro_name, county_fip and boro_code
+boro <- select(neighborhoods, boro_name, county_fip, boro_code)
+
+# Drop the geometry column
+boro_no_geometry <- st_set_geometry(boro, NULL)
+
+# Limit to distinct records
+# just one occurrence of each county/boro
+boro_distinct <- distinct(boro_no_geometry)
+
+# Join the county detail into the trees object
+trees_with_county <- inner_join(trees, boro_distinct, by = c("boroname" = "boro_name"))
+
+# Confirm the new fields county_fip and boro_code exist
+head(trees_with_county)
+```
+
+### Simplify the neighborhood boundaries
+In sf you can use the st_simplify() function to reduce line and polygon complexity. In this exercise you will measure the size of objects before and after st_simplify() in two ways. You will compute the size in megabytes using the handy object_size() function in the pryr package and you will count the number of vertices -- the number of points required to delineate a line or polygon.
+
+```{r}
+# Plot the neighborhoods geometry
+plot(st_geometry(neighborhoods), col = "grey")
+
+# Measure the size of the neighborhoods object
+# count the number of vertices -- the number of points required to delineate a line or polygon
+object_size(neighborhoods)
+
+# Compute the number of vertices in the neighborhoods object
+pts_neighborhoods <- st_cast(neighborhoods$geometry, "MULTIPOINT")
+cnt_neighborhoods <- sapply(pts_neighborhoods, length)
+sum(cnt_neighborhoods)
+
+# Simplify the neighborhoods object
+# Use the preserveTopology = TRUE argument so that borders stay aligned
+# use dTolerance = 100 to set the amount of simplification allowed (this is in meters)
+neighborhoods_simple <- st_simplify(neighborhoods, 
+                            preserveTopology = TRUE, 
+                            dTolerance = 100)
+
+# Measure the size of the neighborhoods_simple object
+object_size(neighborhoods_simple)
+
+# Compute the number of vertices in the neighborhoods_simple object
+pts_neighborhoods_simple <- st_cast(neighborhoods_simple$geometry, "MULTIPOINT")
+cnt_neighborhoods_simple <- sapply(pts_neighborhoods_simple, length)
+sum(cnt_neighborhoods_simple)
+
+# Plot the neighborhoods_simple object geometry
+plot(st_geometry(neighborhoods_simple), col = "grey")
+```
+
+### Converting sf objects to sp objects
+In order to convert an sf object to an sp object (which has a Spatial class) you can use the as() function with Class = "Spatial". To convert back to sf you can use st_as_sf() and accept the defaults. sp objects are from the old sp package replaced by sf.
+
+```{r}
+# Read in the trees data
+trees <- st_read("trees.shp")
+
+# Convert to Spatial class
+trees_sp <- as(trees, Class = "Spatial")
+
+# Confirm conversion, should be "SpatialPointsDataFrame"
+class(trees_sp)
+
+# Convert back to sf
+trees_sf <- st_as_sf(trees_sp)
+
+# Confirm conversion
+class(trees_sf)
+```
+
+### Converting to and from coordinates
+In order to convert a data frame of coordinates into an sf object you can make use of the st_as_sf() function you used in the previous exercise. You can specify the coords argument with the names of the coordinate variables (with the X coordinate/longitude coordinate listed first) and, optionally, the crs argument if you know the CRS of your coordinates. The CRS can be specified as a proj4 string or EPSG code.
+
+If you want to convert your sf point objects to a data frame with coordinates, you can use the st_write() function with a hidden argument (these are arguments associated with an external utility called GDAL and so they're not in the R help) to force sf to include the coordinates in the output file. The argument you need is layer_options = "GEOMETRY=AS_XY".
+
+```{r}
+# Read in the CSV
+trees <- read.csv("trees.csv")
+
+# Convert the data frame to an sf object
+trees_sf <- st_as_sf(trees, coords = c("longitude", "latitude"), crs = 4326)
+
+# Plot the geometry of the points
+plot(st_geometry(trees_sf))
+
+# Write the file out with coordinates
+st_write(trees_sf, "new_trees.csv",  layer_options = "GEOMETRY=AS_XY", delete_dsn = TRUE)
+
+# Read in the file you just created and check coordinates
+new_trees <- read.csv("new_trees.csv")
+head(new_trees)
+```
+
+### Change the raster grid cell size using aggregate
+For rasters, the function to reduce resolution is aggregate() which, as you might guess, aggregates grid cells into larger grid cells using a user-defined function (for example, mean or max). The function used to aggregate the values is determined by the fun argument (the default being mean) and the amount of aggregation is driven by the fact (the default being 2) argument.
+
+```{r}
+# Read in the canopy layer
+canopy <- raster("canopy.tif")
+
+# Plot the canopy raster
+plot(canopy)
+
+# Determine the raster resolution
+res(canopy)
+
+# Determine the number of cells
+ncell(canopy)
+
+# Aggregate the raster
+canopy_small <- aggregate(canopy, fact = 10)
+
+# Plot the new canopy layer
+plot(canopy_small)
+
+# Determine the new raster resolution
+res(canopy_small)
+
+# Determine the number of cells in the new raster
+ncell(canopy_small)
+```
+
+### Change values and handle missing values in rasters
+There are many situations where you might need to change raster values. You may want to change outlier values to NA for example. In the raster package, reclassification is performed with the reclassify() function.
+
+In the canopy raster you've worked with the values are percentages and are supposed to range between 0 and 100. Anything above 100 should be an NA. In this exercise you will assign any values above 100 to NA.
+
+```{r}
+# Plot the canopy layer to see the values above 100
+plot(canopy)
+
+# Set up the matrix
+vals <- cbind(100, 300, NA)
+
+# Reclassify values above 100 to NA
+canopy_reclass <- reclassify(canopy, rcl = vals)
+
+# Plot again and confirm that the legend stops at 100
+plot(canopy_reclass)
+```
+
+### Buffer layers
+Computing buffers is a key spatial analysis skill and the resulting buffers have a wide range of uses like, for example, identifying the number of roads within one kilometer of a school or computing the number of hazardous waste sites near sensitive natural areas.
+
+Although, technically you can buffer data with unprojected coodinate reference systems, the buffer distance will be more meaningful with a projected CRS so it is highly recommended that you transform unprojected data to a projected CRS before buffering.
+
+```{r}
+# Review df
+df
+
+# Convert the data frame to an sf object             
+df_sf <- st_as_sf(df, coords = c("longitude", "latitude"), crs = 4326)
+
+# Transform the points to match the manhattan CRS
+df_crs <- st_transform(df_sf, crs = crs(manhattan, asText = TRUE))
+
+# Buffer the points
+df_buf <- st_buffer(df_crs, dist = 1000)
+
+# Plot the manhattan image (it is multi-band)
+plotRGB(manhattan)
+plot(st_geometry(df_buf), col = "firebrick", add = TRUE)
+plot(st_geometry(df_crs), pch = 16, add = TRUE)
+```
+
+### Compute polygon centroids
+Similar to buffering, computing polygon centroids is a bedrock geoprocessing task used to assign values and even to help with labeling maps. The function for this in sf is st_centroid().
+
+Also similar to buffering, centroid calculations should generally be performed on data with a projected coordinate reference system.
+
+```{r}
+# Read in the neighborhods shapefile
+neighborhoods <- st_read("neighborhoods.shp")
+
+# Project neighborhoods to match manhattan
+neighborhoods_tf <- st_transform(neighborhoods, crs = 32618)
+
+# Compute the neighborhood centroids
+centroids <- st_centroid(neighborhoods_tf)
+
+# Plot the neighborhood geometry
+plot(st_geometry(neighborhoods_tf), col = "grey", border = "white")
+plot(centroids, pch = 16, col = "firebrick", add = TRUE)
+```
+
+
+
+
+
+
+
+
 
