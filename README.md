@@ -27,7 +27,7 @@ I also have some reference materials I've contributed to my company's [GitHub re
 
 - Spatial
     - [Visualising Geospatial data in Python DataCamp](spatial/intro_geospatial.ipynb) [[1](https://learn.datacamp.com/courses/visualizing-geospatial-data-in-python)]
-    - [Spatial Analysis with sf and raster in R](spatial/spatial_r_datacamp.) [[1](https://learn.datacamp.com/courses/spatial-analysis-with-sf-and-raster-in-r)]
+    - [Spatial Analysis with sf and raster in R](spatial/spatial_r_datacamp.Rmd) [[1](https://learn.datacamp.com/courses/spatial-analysis-with-sf-and-raster-in-r)]
 
 - Networks
     - [Networkx](networks/intro_networks.ipynb) [[1](https://www.youtube.com/watch?v=nN84qeE0jtM), [2](https://www.youtube.com/watch?v=yMSCWLma46s&feature=youtu.be), [3](https://www.youtube.com/watch?v=1ErL1z_lKd8&feature=youtu.be)]
