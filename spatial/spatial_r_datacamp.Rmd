@@ -518,11 +518,432 @@ plot(st_geometry(neighborhoods_tf), col = "grey", border = "white")
 plot(centroids, pch = 16, col = "firebrick", add = TRUE)
 ```
 
+### Create a bounding box around vector data
+You can compute bounding boxes around vector data using sf. These can help you, for example, create polygons to clip layers to a common area for an analysis or identify regions of influence.
 
+In the sf package, there is a function for extracting the bounding box coordinates, if that's all you need, this is st_bbox(). More likely you'll want to create a new sf object (a polygon) from those coordinates and to do this sf provides the st_make_grid() function.
 
+st_make_grid() can be used to make a multi-row and multi-column grid covering your input data but it can also be used to make a grid of just one cell (a bounding box). To do this, you need to specify the number of grid cells as n = 1.
 
+```{r}
+# Plot the neighborhoods and beech trees
+plot(st_geometry(neighborhoods), col = "grey", border = "white")
+plot(beech, add = TRUE, pch = 16, col = "forestgreen")
 
+# Compute the coordinates of the bounding box
+st_bbox(beech)
 
+# Create a bounding box polygon
+beech_box <- st_make_grid(beech, n = 1)
 
+# Plot the neighborhoods, add the beech trees and add the new box
+plot(st_geometry(neighborhoods), col = "grey", border = "white")
+plot(beech, add = TRUE, pch = 16, col = "forestgreen")
+plot(beech_box, add = TRUE)
+```
+
+### Dissolve multiple features into one
+In order to compute a tighter bounding box, a convex hull, around a set of points like the beech trees from the previous exercise you'll need to learn one more function first.
+
+For points you don't want a convex hull around each point! This doesn't even make sense. More likely you want to compute a convex hull around all your points. If you have a set of points and you want to draw a convex hull around them you first need to bundle the points into a single MULTIPOINT feature and in order to do this you will use the dissolve function in sf called st_union().
+
+With polygons, st_union() will dissolve all the polygons into a single polygon representing the area where all the polygons overlap. Your set of individual points will be dissolved/unioned into a single, MULTIPOINT feature that you can use for tasks like computing the convex hull.
+
+```{r}
+# Buffer the beech trees by 3000
+beech_buffer <- st_buffer(beech, dist=3000)
+
+# Limit the object to just geometry
+beech_buffers <- st_geometry(beech_buffer)
+
+# Compute the number of features in beech_buffer
+length(beech_buffers)
+
+# Plot the tree buffers
+plot(beech_buffers)
+
+# Dissolve the buffers
+beech_buf_union <- st_union(beech_buffers)
+
+# Compute the number of features in beech_buf_union
+length(beech_buf_union)
+
+# Plot the dissolved buffers
+plot(beech_buf_union)
+```
+
+### Compute a convex hull around vectors
+A more precise bounding polygon is sometimes needed, one that fits your data more neatly. For this, you can use the st_convex_hull() function. Note that st_convex_hull() will compute a tight box around each one of your features individually so if you want to create a convex hull around a group of features you'll need to use st_union() to combine individual features into a single multi-feature.
+
+```{r}
+# Look at the data frame to see the type of geometry
+head(beech)
+
+# Convert the points to a single multi-point
+beech1 <- st_union(beech)
+
+# Look at the data frame to see the type of geometry
+head(beech1)
+
+# Confirm that we went from 17 features to 1 feature
+length(beech)
+length(beech1)
+
+# Compute the tight bounding box
+beech_hull <- st_convex_hull(beech1)
+
+# Plot the points together with the hull
+plot(beech_hull, col = "red")
+plot(beech1, add = TRUE)
+```
+
+### Spatial joins
+For many analysis types you need to link geographies spatially. For example, you want to know how many trees are in each neighborhood but you don't have a neighborhood attribute in the tree data. The best way to do this is with a spatial join using st_join().
+
+Importantly, the st_join() function requires sf data frames as input and will not accept an object that is just sf geometry. You can use the st_sf() function to convert sf geometry objects to an sf data frame (st_sf() is essentially the opposite of st_geometry()).
+
+```{r}
+# Plot the beech on top of the neighborhoods
+plot(st_geometry(neighborhoods))
+plot(beech, add = TRUE, pch = 16, col = "red")
+
+# Determine whether beech has class data.frame
+class(beech)
+
+# Convert the beech geometry to a sf data frame
+beech_df <- st_sf(beech)
+
+# Confirm that beech now has the data.frame class
+class(beech_df)
+
+# Join the beech trees with the neighborhoods
+beech_neigh <- st_join(beech_df, neighborhoods)
+
+# Confirm that beech_neigh has the neighborhood information
+head(beech_neigh)
+```
+
+### Spatial relationships
+In this exercise you will determine which neighborhoods are at least partly within 2000 meters of the Empire State Building with st_intersects() and those that are completely within 2000 meters of the Empire State Building using st_contains(). You will then use the st_intersection() function (notice the slight difference in function name!) to clip the neighborhoods to the buffer.
+
+A note about the output of functions that test relationships between two sets of features. The output of these and related functions is a special kind of list (with the class sgbp). For example, when using st_intersects(), the first element in the output can be accessed using [[1]], which shows polygons from the second polygon that intersect with the first polygon. Likewise, [[2]] would show the polygons from from the first polygon that intersect with the second polygon.
+
+```{r}
+# Identify neighborhoods that intersect with the buffer
+neighborhoods_int <- st_intersects(buf, neighborhoods)
+
+# Identify neighborhoods contained by the buffer
+neighborhoods_cont <- st_contains(buf, neighborhoods)
+
+# Get the indexes of which neighborhoods intersect
+# and are contained by the buffer
+int <- neighborhoods_int[[1]]
+cont <- neighborhoods_cont[[1]]
+
+# Get the names of the names of neighborhoods in buffer
+neighborhoods$ntaname[int]
+
+# Clip the neighborhood layer by the buffer (ignore the warning)
+neighborhoods_clip <- st_intersection(buf, neighborhoods)
+
+# Plot the geometry of the clipped neighborhoods
+plot(st_geometry(neighborhoods_clip), col = "red")
+plot(neighborhoods[cont,], add = TRUE, col = "yellow")
+```
+
+### Measuring distance between features
+Of course, measuring distance between feature sets is a component of spatial analysis 101 -- a core skill for any analyst. There are several functions in base R as well as in the packages rgeos and geosphere to compute distances, but the st_distance() function from sf provides a useful feature-to-feature distance matrix as output and can be used for most distance calculation needs.
+
+In this exercise you'll measure the distance from the Empire State Building to all the parks and identify the closest one.
+
+```{r}
+# Read in the parks object
+parks <- st_read("parks.shp")
+
+# Test whether the CRS match
+st_crs(empire_state) == st_crs(parks)
+
+# Project parks to match empire state
+parks_es <- st_transform(parks, crs = st_crs(empire_state))
+
+# Compute the distance between empire_state and parks_es
+d <- st_distance(empire_state, parks_es)
+
+# Take a quick look at the result
+head(d)
+
+# Find the index of the nearest park
+nearest <- which.min(d)
+
+# Identify the park that is nearest
+parks_es[nearest, ]
+```
+
+### Limit rasters to focus areas
+Mask and crop are similar operations that allow you to limit your raster to a specific area of interest. With mask() you essentially place your area of interest on top of the raster and any raster cells outside of the boundary are assigned NA values. A reminder that currently the raster package does not support sf objects so they will need to be converted to Spatial objects with, for example, as(input, "Spatial")
+
+```{r}
+# Project parks to match canopy
+parks_cp <- st_transform(parks, crs = crs(canopy, asText = TRUE))
+
+# Compute the area of the parks
+areas <- st_area(parks_cp)
+
+# Filter to parks with areas > 30000
+parks_big <- filter(parks_cp, unclass(areas) > 30000)
+
+# Plot the canopy raster
+plot(canopy)
+
+# Plot the geometry of parks_big
+plot(st_geometry(parks_big))
+
+# Convert parks to a Spatial object
+parks_sp <- as(parks_big, "Spatial")
+
+# Mask the canopy layer with parks_sp and save as canopy_mask
+canopy_mask <- mask(canopy, mask = parks_sp)
+
+# Plot canopy_mask -- this is a raster!
+plot(canopy_mask)
+```
+
+### Crop a raster based on another spatial object
+As you saw in the previous exercise with mask(), the raster extent is not changed. If the extents of the input raster and the mask itself are different then they will still be different after running mask(). In many cases, however, you will want your raster to share an extent with another layer and this is where crop() comes in handy. With crop() you are cropping the raster so that the extent (the bounding box) of the raster matches the extent of the input crop layer. But within the bounding box no masking is done (no raster cells are set to NA).
+
+In this exercise you will both mask and crop the NYC canopy layer based on the large parks and you'll compare. You should notice that the masked raster includes a lot of NA values (there are the whitespace) and that the extent is the same as the original canopy layer. With the cropped layer you should notice that the extent of the cropped canopy layer matches the extent of the large parks (essentially it's zoomed in).
+
+```{r}
+# Convert the parks_big to a Spatial object
+parks_sp <- as(parks_big, "Spatial")
+
+# Mask the canopy with the large parks 
+canopy_mask <- mask(canopy, mask = parks_sp)
+
+# Plot the mask
+plot(canopy_mask)
+
+# Crop canopy with parks_sp
+canopy_crop <- crop(canopy, parks_sp)
+
+# Plot the cropped version and compare
+plot(canopy_crop)
+```
+
+### Extract raster values by location
+Beyond simply masking and cropping you may want to know the actual cell values at locations of interest. You might, for example, want to know the percentage canopy at your landmarks or within the large parks. This is where the extract() function comes in handy.
+
+Usefully, and you'll see this in a later analysis, you can feed extract() a function that will get applied to extracted cells. For example, you can use extract() to extract raster values by neighborhood and with the fun = mean argument it will return an average cell value by neighborhood.
+
+Similar to other raster functions, it is not yet set up to accept sf objects so you'll need to convert to a Spatial object.
+
+```{r}
+# Project the landmarks to match canopy
+landmarks_cp <- st_transform(landmarks, crs = crs(canopy, asText = TRUE))
+
+# Convert the landmarks to a Spatial object
+landmarks_sp <- as(landmarks_cp, "Spatial")
+
+# Extract the canopy values at the landmarks
+landmarks_ex <- extract(canopy, landmarks_sp)
+
+# Look at the landmarks and extraction results
+landmarks_cp
+landmarks_ex
+```
+
+### Raster math with overlay
+You will now use the canopy layer and an "imperviousness" layer from the same source, the United States Geological Survey. Imperviousness measures whether water can pass through a surface. So a high percentage impervious surface might be a road that does not let water pass through while a low percentage impervious might be something like a lawn.
+
+What you will do in this exercise is essentially identify the most urban locations by finding areas that have both a low percentage of tree canopy ([removed] 80%). To do this, we defined the function f to do the raster math for you.
+
+```{r}
+# Read in the canopy and impervious layer
+canopy <- raster("canopy.tif")
+impervious <- raster("impervious.tif")
+
+# Function f with 2 arguments and the raster math code
+f <- function(rast1, rast2) {
+  rast1 < 20 & rast2 > 80
+}
+
+# Do the overlay using f as fun
+canopy_imperv_overlay <- overlay(canopy, impervious, fun = f)
+
+# Plot the result (low tree canopy and high impervious areas)
+plot(canopy_imperv_overlay)
+```
+
+### Compute tree density by neighborhood (I)
+In order to compute tree density by neighborhood you need two things. You will need to know the area of the neighborhoods, which you will compute in the next exercise. And you need the tree counts by neighborhood which is the focus of this exercise.
+
+You will produce counts of all trees by neighborhood in NYC and create a single data frame with a column for total trees. The result should be a data frame with no geometry.
+
+```{r}
+# Compute the counts of all trees by hood
+tree_counts <- count(trees, hood)
+
+# Take a quick look
+head(tree_counts)
+
+# Remove the geometry
+tree_counts_no_geom <- st_set_geometry(tree_counts, NULL)
+
+# Rename the n variable to tree_cnt
+tree_counts_renamed <- rename(tree_counts_no_geom, tree_cnt = n)
+  
+# Create histograms of the total counts
+hist(tree_counts_renamed$tree_cnt)
+```
+
+### Compute tree density by neighborhood (II)
+We have the tree counts (from the previous exercise). In this exercise you will compute neighborhood areas, add them to the neighborhood sf object and then you'll join in the non-spatial tree counts data frame from the previous exercise.
+
+```{r}
+# Compute areas and unclass to remove units
+areas <- unclass(st_area(neighborhoods))
+
+# Add the areas to the neighborhoods object
+neighborhoods_area <- mutate(neighborhoods, area = areas)
+
+# Join neighborhoods and counts
+neighborhoods_counts <- left_join(neighborhoods_area, 
+                            tree_counts_renamed, by = "hood")
+
+# Replace NA values with 0
+neighborhoods_counts <- mutate(neighborhoods_counts, 
+                            tree_cnt = ifelse(is.na(tree_cnt), 
+                                              0, tree_cnt))
+
+# Compute the density
+neighborhoods_counts <- mutate(neighborhoods_counts, 
+                               tree_density = tree_cnt/area)
+```
+
+### Compute average tree canopy by neighborhood
+In the previous exercises you computed tree density by neighborhood using tree counts. In this exercise you will compute average tree canopy by neighborhood as a percentage so that we can compare if the results are similar.
+
+```{r}
+# Confirm that you have the neighborhood density results
+head(neighborhoods)
+
+# Transform the neighborhoods CRS to match the canopy layer
+neighborhoods_crs <- st_transform(neighborhoods, crs = st_crs(canopy, asText = TRUE))
+
+# Convert neighborhoods object to a Spatial object
+neighborhoods_sp <- as(neighborhoods_crs, Class = "Spatial")
+
+# Compute the mean of canopy values by neighborhood
+canopy_neighborhoods <- extract(canopy, neighborhoods_sp, fun = mean)
+
+# Add the mean canopy values to neighborhoods
+neighborhoods_avg_canopy <- mutate(neighborhoods, avg_canopy = canopy_neighborhoods)
+```
+
+### Create plots using ggplot2
+As an initial review of the data you created you will compute correlations and create histograms and a scatter plot using ggplot2.
+
+```{r}
+# Load the ggplot2 package
+library(ggplot2)
+
+# Create a histogram of tree density (tree_density)
+ggplot(neighborhoods, aes(x = tree_density)) + 
+  geom_histogram(color = "white")
+
+# Create a histogram of average canopy (avg_canopy)
+ggplot(neighborhoods, aes(x = avg_canopy)) + 
+  geom_histogram(color = "white")
+
+# Create a scatter plot of tree_density vs avg_canopy
+ggplot(neighborhoods, aes(x = tree_density, y = avg_canopy)) + 
+    geom_point() + 
+    stat_smooth()
+
+# Compute the correlation between density and canopy
+cor(neighborhoods$tree_density, neighborhoods$avg_canopy)
+```
+
+### Create a map using ggplot2
+The geom_sf() function operates like any other layer in ggplot2 where you can link variables to aesthetics on the plot through the aes() function. In a mapping context this might mean, for example, creating a choropleth map by color coding the polygons based on a variable. If you leave off the aesthetic mapping geom_sf() will map the geometry alone.
+
+```{r}
+# Plot the tree density with default colors
+ggplot(neighborhoods) + 
+  geom_sf(aes(fill = tree_density))
+
+# Plot the tree canopy with default colors
+ggplot(neighborhoods) + 
+  geom_sf(aes(fill = avg_canopy))
+  
+# Plot the tree density using scale_fill_gradient()
+ggplot(neighborhoods) + 
+  geom_sf(aes(fill = tree_density)) + 
+  scale_fill_gradient(low = "#edf8e9", high = "#005a32")
+
+# Plot the tree canopy using the scale_fill_gradient()
+ggplot(neighborhoods) + 
+  geom_sf(aes(fill = avg_canopy)) +
+  scale_fill_gradient(low = "#edf8e9", high = "#005a32")
+```
+
+### Create a map using tmap
+The tmap package is an excellent tool for making maps. You'll see that it simplifies the process of binning your data values for nice maps and makes it easy to stitch together different layers.
+
+tmap operates similarly to ggplot2 in the sense that it starts with a function, in this case tm_shape(), to set up the map and then is followed by layers and other instructions separated with the +.
+
+```{r}
+# Create a simple map of neighborhoods
+tm_shape(neighborhoods) + 
+    tm_polygons()
+
+# Create a color-coded map of neighborhood tree density
+tm_shape(neighborhoods) + 
+    tm_polygons("tree_density")
+
+# Style the tree density map
+tm_shape(neighborhoods) + 
+    tm_polygons("tree_density", palette = "Greens", 
+                style = "quantile", n = 7, 
+                title = "Trees per sq. KM")
+
+# Create a similar map of average tree canopy
+tm_shape(neighborhoods) + 
+    tm_polygons("avg_canopy", palette = "Greens", 
+                style = "quantile", n = 7, 
+                title = "Average tree canopy (%)")
+```
+
+### Use tmap to create a final pretty map
+In this exercise you will use tmap to create a final map with three map views to help you to compare the green you see in an aerial photo with the tree density and average canopy results you computed by neighborhood. The question you're trying to answer is which measure, tree density or average tree canopy, more closely matches what you can see in the aerial photo.
+
+Note: In map2, you will make use of the bbox argument to force the view extents to match the aerial photo.
+
+```{r}
+# Create a map of the manhattan aerial photo
+tm_shape(manhattan) + 
+  tm_raster()
+
+# Create a map of the neighborhood polygons
+tm_shape(neighborhoods) + 
+  tm_borders(col = "black", lwd = 0.5, alpha = 0.5)
+
+# Combine the aerial photo and neighborhoods into one map
+map1 <- tm_shape(manhattan) + 
+  tm_raster() + 
+  tm_shape(neighborhoods) + 
+  tm_borders(col = "black", lwd = 0.5, alpha = 0.5)
+
+# Create the second map of tree measures
+map2 <- tm_shape(neighborhoods, bbox = bbox(manhattan)) +
+  tm_polygons(
+    c("tree_density", "avg_canopy"), 
+    style = "quantile",
+    palette = "Greens",
+    title = c("Tree Density", "Average Tree Canopy")) 
+
+# Combine the two maps into one
+tmap_arrange(map1, map2, asp = NA)
+```
 
 
