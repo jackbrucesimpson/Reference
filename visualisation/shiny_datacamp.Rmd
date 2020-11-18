@@ -1,0 +1,243 @@
+---
+title: "Building Web Applications with Shiny in R DataCamp"
+output: html_notebook
+---
+
+## Get Started with Shiny
+### "Hello, World" app input (UI)
+The "Hello, World!!!" app, while enthusiastic, could be more fun. Extend the app and have it wish a hello to a specific person. A user will enter a name and the app will update to wish that name "Hello".
+
+For users to enter text, you'll have to use a text-specific shiny input function to capture it. Recall that shiny makes available a number of input functions depending on what kind of input you'd like to capture from your users.
+
+```{r}
+ui <- fluidPage(
+	# CODE BELOW: Add a text input "name"
+	textInput("name", "What is your name?")
+)
+
+server <- function(input, output) {
+  
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+### "Hello, World" app output (UI/Server)
+To finish up your "Hello, world" app, you'll have to actually display the text that's input.
+
+Recall this is how you construct an output from an input:
+
+# Render output y using input x
+```
+output$y <- renderText({
+  input$x
+})
+```
+
+```{r}
+ui <- fluidPage(
+	textInput("name", "What is your name?"),
+	# CODE BELOW: Display the text output, greeting
+    # Make sure to add a comma after textInput()
+	textOutput("greeting")
+)
+
+server <- function(input, output) {
+	# CODE BELOW: Render a text output, greeting
+	output$greeting <- renderText({
+		paste("Hello,", input$name)
+	})
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+### Add input (UI)
+This app will allow users to enter a baby name and visualize the popularity of that name over time.
+
+The first step is to add a text input to the UI that will allow a user to enter their (or any other) name. Try using the optional default argument this time around.
+
+### Add output (UI/Server)
+The next step in building your app is to add an empty plot as a placeholder. Recall that in order to add a plot p assigned to an object named x to a Shiny app, you need to:
+
+Render the plot object using renderPlot({p}).
+Assign the rendered plot to output$x.
+Display the plot in the UI using plotOutput("x").
+
+### Update layout (UI)
+You can use layout functions provided by Shiny to arrange the UI elements. In this case, we want to use a sidebarLayout(), where the input is placed inside a sidebarPanel() and the output is placed inside the mainPanel(). You can use this template to update the layout of your app.
+
+```
+sidebarLayout(
+  sidebarPanel(p("This goes into the sidebar on the left")),
+  mainPanel(p("This goes into the panel on the right"))
+)
+```
+
+We have pre-loaded the shiny and ggplot2 packages for you. Note that p('hello') returns an HTML paragraph with the text "hello".
+
+```{r}
+ui <- fluidPage(
+  titlePanel("Baby Name Explorer"),
+  # CODE BELOW: Add a sidebarLayout, sidebarPanel, and mainPanel
+  
+  sidebarLayout(
+    sidebarPanel(
+    textInput('name', 'Enter Name', 'David'),
+  ),
+    mainPanel(
+      plotOutput('trend'),
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  output$trend <- renderPlot({
+    ggplot()
+  })
+}
+shinyApp(ui = ui, server = server)
+```
+
+### Update output (server)
+You are almost there! The final step is to update the plot output to display a line plot of prop vs. year, colored by sex, for the name that was input by the user. You can use this plot template to create your plot:
+
+ggplot(subset(babynames, name == "David")) +
+  geom_line(aes(x = year, y = prop, color = sex))
+Recall that a user input named foo can be accessed as input$foo in the server. We have already pre-loaded the shiny and ggplot2 packages, as well as the babynames dataset.
+
+```{r}
+ui <- fluidPage(
+  titlePanel("Baby Name Explorer"),
+  sidebarLayout(
+    sidebarPanel(textInput('name', 'Enter Name', 'David')),
+    mainPanel(plotOutput('trend'))
+  )
+)
+server <- function(input, output, session) {
+  output$trend <- renderPlot({
+    # CODE BELOW: Update to display a line plot of the input name
+    ggplot(subset(babynames, name == input$name)) +
+      geom_line(
+        aes(x = year, y = prop, color = sex))
+  })
+}
+shinyApp(ui = ui, server = server)
+```
+
+## Inputs, Outputs, and Layouts
+### Add a select input
+Adding an input to a shiny app is a two step process, where you first add an ___Input(“x”) function to the UI and then access its value in the server using input$x.
+
+For example, if you want users to choose an animal from a list, you can use a selectInput, and refer to the chosen value as input$animal:
+
+```
+selectInput(
+  'animal', 
+  'Select Animal', 
+  selected = 'Cat', 
+  choices = c('Dog', 'Cat')
+)
+```
+
+In this exercise, you will build a Shiny app that lets users visualize the top 10 most popular names by sex by adding an input to let them choose the sex.
+
+```{r}
+ui <- fluidPage(
+  titlePanel("What's in a Name?"),
+  # CODE BELOW: Add select input named "sex" to choose between "M" and "F"
+  selectInput(
+    'sex', 
+    'Select Sex', 
+    selected = 'F', 
+    choices = c('M', 'F')
+  ),
+  # Add plot output to display top 10 most popular names
+  plotOutput('plot_top_10_names')
+)
+
+server <- function(input, output, session){
+  # Render plot of top 10 most popular names
+  output$plot_top_10_names <- renderPlot({
+    # Get top 10 names by sex and year
+    top_10_names <- babynames %>% 
+      # MODIFY CODE BELOW: Filter for the selected sex
+      filter(sex == input$sex) %>% 
+      filter(year == 1900) %>% 
+      top_n(10, prop)
+    # Plot top 10 names by sex and year
+    ggplot(top_10_names, aes(x = name, y = prop)) +
+      geom_col(fill = "#263e63")
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+### Add a slider input to select year
+Slider inputs are great for numeric inputs, both when you'd like users to choose from a range of values and also when they should choose a static value from a set of options, but you want to be more creative than using a selectInput().
+
+Adjust your app displaying top 10 names for a year by adding a slider to select a specific year available in babynames.
+
+```{r}
+ui <- fluidPage(
+  titlePanel("What's in a Name?"),
+  # Add select input named "sex" to choose between "M" and "F"
+  selectInput('sex', 'Select Sex', choices = c("F", "M")),
+  # CODE BELOW: Add slider input named 'year' to select years  (1900 - 2010)
+  sliderInput("year", "Year", value=1900, min=1900,max=2010),
+  # Add plot output to display top 10 most popular names
+  plotOutput('plot_top_10_names')
+)
+
+server <- function(input, output, session){
+  # Render plot of top 10 most popular names
+  output$plot_top_10_names <- renderPlot({
+    # Get top 10 names by sex and year
+    top_10_names <- babynames %>% 
+      filter(sex == input$sex) %>% 
+    # MODIFY CODE BELOW: Filter for the selected year
+      filter(year == input$year) %>% 
+      top_n(10, prop)
+    # Plot top 10 names by sex and year
+      ggplot(top_10_names, aes(x = name, y = prop)) +
+        geom_col(fill = "#263e63")
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+### Add a table output
+In order to add any output to a Shiny app, you need to:
+
+Create the output (plot, table, text, etc.).
+Render the output object using the appropriate render___ function.
+Assign the rendered object to output$x.
+Add the output to the UI using the appropriate ___Output function.
+In this exercise, you will add a table output to the baby names explorer app you created earlier. Don't forget that code inside a render___ function needs to be wrapped inside curly braces (e.g. renderPlot({...})).
+
+```{r}
+
+```
+
+
+
+
+## Reactive Programming
+### 
+
+
+
+
+
+## Build Shiny Apps
+### 
+
+
+
+
+
+
+
+
