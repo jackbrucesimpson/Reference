@@ -93,9 +93,9 @@ I also have some reference materials I've contributed to my company's [GitHub re
     - [SQL in the Jupyter Notebook](programming/ipython_sql.ipynb)
 
 - Visualisation
-    - [Bokeh DataCamp](visualisation/bokeh_datacamp.ipynb)[[1](https://learn.datacamp.com/courses/interactive-data-visualization-with-bokeh)]
-    - [Building Web Applications with Shiny in R DataCamp](visualisation/shiny_datacamp.Rmd)[[1](https://learn.datacamp.com/courses/building-web-applications-with-shiny-in-r)]
-    - [Interactive Maps with leaflet in R DataCamp](visualisation/leaflet_datacamp.Rmd)[[1](https://learn.datacamp.com/courses/interactive-maps-with-leaflet-in-r)]
+    - [Bokeh DataCamp](visualisation/bokeh_datacamp.ipynb) [[1](https://learn.datacamp.com/courses/interactive-data-visualization-with-bokeh)]
+    - [Building Web Applications with Shiny in R DataCamp](visualisation/shiny_datacamp.Rmd) [[1](https://learn.datacamp.com/courses/building-web-applications-with-shiny-in-r)]
+    - [Interactive Maps with leaflet in R DataCamp](visualisation/leaflet_datacamp.Rmd) [[1](https://learn.datacamp.com/courses/interactive-maps-with-leaflet-in-r)]
     
 ### Programming
 - [Web Scraping with Beautiful Soup](programming/beautiful_soup.ipynb) [[1](https://www.dataquest.io/blog/web-scraping-tutorial-python/)]
