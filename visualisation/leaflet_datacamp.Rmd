@@ -3,16 +3,44 @@ title: "Interactive Maps with leaflet in R DataCamp"
 output: html_notebook
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+## Setting Up Interactive Web Maps
+### Creating an Interactive Web Map
+Similar to the packages in the tidyverse, the leaflet package makes use of the pipe operator (i.e., %>%) from the magrittr package to chain function calls together. This means we can pipe the result of one function into another without having to store the intermediate output in an object. For example, one way to find every car in the mtcars data set with a mpg >= 25 is to pipe the data through a series of functions.
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+```
+mtcars  %>% 
+    mutate(car = rownames(.))  %>% 
+    select(car, mpg)  %>% 
+    filter(mpg >= 25)  
+```
+    
+To create a web map in R, you will chain together a series of function calls using the %>% operator. Our first function leaflet() will initialize the htmlwidget then we will add a map tile using the addTiles() function.
 
 ```{r}
-plot(cars)
+# Load the leaflet library
+library(leaflet)
+
+# Create a leaflet map with default map tile using addTiles()
+leaflet() %>%
+    addTiles()
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+### Provider Tiles
+In the previous exercise, addTiles() added the default OpenStreetMap (OSM) tile to your leaflet map. Map tiles weave multiple map images together. The map tiles presented adjust when a user zooms or pans the map enabling the interactive features you experimented with in exercise 2.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+The leaflet package comes with more than 100 map tiles that you can use. These tiles are stored in a list called providers and can be added to your map using addProviderTiles() instead of addTiles().
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+```{r}
+
+```
+
+### 
+
+## Plotting Points
+### 
+
+## Groups, Layers, and Extras
+### 
+
+## Plotting Polygons
+### 

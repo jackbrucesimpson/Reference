@@ -87,6 +87,7 @@ I also have some reference materials I've contributed to my company's [GitHub re
 - R
     - [Introduction to the Tidyverse DataCamp](R/intro_tidyverse.Rmd) [[1](https://www.datacamp.com/courses/introduction-to-the-tidyverse)]
     - [Joe's tutorial notes: covers tidyverse, figures, dates](R/joe_tutorial.R)
+    - [Plexos Post Processing using multiprocessing to batch process CSVs](R/plex_post_process.R)
 
 - SQL
     - [SQL Reference](programming/sql_reference.ipynb) [[1](https://code.tutsplus.com/articles/sql-for-beginners--net-8200)]

@@ -310,33 +310,1001 @@ Layout functions allow inputs and outputs to be visually arranged in the UI. A w
 In this exercise, you will modify the layout of a Shiny app that lets users explore the popularity of trendy names.
 
 ```{r}
+ui <- fluidPage(
+  # MODIFY CODE BLOCK BELOW: Wrap in a sidebarLayout
+  sidebarLayout(
+    # MODIFY CODE BELOW: Wrap in a sidebarPanel
+    sidebarPanel(
+      selectInput('name', 'Select Name', top_trendy_names$name)
+    ),
+    # MODIFY CODE BELOW: Wrap in a mainPanel
+    mainPanel(
+      plotly::plotlyOutput('plot_trendy_names'),
+      DT::DTOutput('table_trendy_names')
+    )
+  )
+)
+server <- function(input, output, session){
+  # Function to plot trends in a name
+  plot_trends <- function(){
+     babynames %>% 
+      filter(name == input$name) %>% 
+      ggplot(aes(x = year, y = n)) +
+      geom_col()
+  }
+  output$plot_trendy_names <- plotly::renderPlotly({
+    plot_trends()
+  })
+  
+  output$table_trendy_names <- DT::renderDT({
+    babynames %>% 
+      filter(name == input$name)
+  })
+}
+shinyApp(ui = ui, server = server)
+```
 
+### Tab layouts
+Displaying several tables and plots on the same page can lead to visual clutter and distract users of the app. In such cases, the tab layout comes in handy, as it allows different outputs to be displayed as tabs.
+
+In this exercise, we will start with the Shiny app using the sidebar layout from the last exercise and modify it to use tabs. This exercise should also make it very clear that Shiny makes it really easy to switch app layouts with only a few modifications to the code.
+
+```{r}
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      selectInput('name', 'Select Name', top_trendy_names$name)
+    ),
+    mainPanel(
+      # MODIFY CODE BLOCK BELOW: Wrap in a tabsetPanel
+      tabsetPanel(
+        # MODIFY CODE BELOW: Wrap in a tabPanel providing an appropriate label
+        tabPanel('Plot', plotly::plotlyOutput('plot_trendy_names')),
+        # MODIFY CODE BELOW: Wrap in a tabPanel providing an appropriate label
+        tabPanel('Table', DT::DTOutput('table_trendy_names'))
+      )
+    )
+  )
+)
+server <- function(input, output, session){
+  # Function to plot trends in a name
+  plot_trends <- function(){
+     babynames %>% 
+      filter(name == input$name) %>% 
+      ggplot(aes(x = year, y = n)) +
+      geom_col()
+  }
+  output$plot_trendy_names <- plotly::renderPlotly({
+    plot_trends()
+  })
+  
+  output$table_trendy_names <- DT::renderDT({
+    babynames %>% 
+      filter(name == input$name)
+  })
+}
+shinyApp(ui = ui, server = server)
+```
+
+### Themes
+Shiny makes it easy to customize the theme of an app. The UI functions in Shiny make use of Twitter Bootstrap, a popular framework for building web applications. Bootswatch extends Bootstrap by making it really easy to skin an application with minimal code changes.
+
+In this exercise, you will add a title panel to your app, use the theme selector to explore different themes, and apply then a theme of your choice.
+
+```{r}
+ui <- fluidPage(
+  # CODE BELOW: Add a titlePanel with an appropriate title
+  titlePanel("Theme Selector"),
+  # REPLACE CODE BELOW: with theme = shinythemes::shinytheme("<your theme>")
+  #shinythemes::themeSelector(),
+  theme = shinytheme("united"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput('name', 'Select Name', top_trendy_names$name)
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel('Plot', plotly::plotlyOutput('plot_trendy_names')),
+        tabPanel('Table', DT::DTOutput('table_trendy_names'))
+      )
+    )
+  )
+)
+server <- function(input, output, session){
+  # Function to plot trends in a name
+  plot_trends <- function(){
+     babynames %>% 
+      filter(name == input$name) %>% 
+      ggplot(aes(x = year, y = n)) +
+      geom_col()
+  }
+  output$plot_trendy_names <- plotly::renderPlotly({
+    plot_trends()
+  })
+  
+  output$table_trendy_names <- DT::renderDT({
+    babynames %>% 
+      filter(name == input$name)
+  })
+}
+shinyApp(ui = ui, server = server)
+```
+
+### App 1: Multilingual Greeting
+Congratulations! You are now ready to start building your own apps. The best way to learn Shiny is by deconstructing an existing app and rebuilding it from scratch.
+
+In this exercise, you are going to build a Shiny app that allows you to enter your name and select a greeting (Hello/Bonjour), and returns "Hello, Kaelen", when the user is Kaelen.
+
+```{r}
+ui <- fluidPage(
+  selectInput('greeting_type', 'Select greeting', c("Hello", "Bonjour")),
+  textInput('name', 'Enter your name'),
+  textOutput('greeting')
+)
+
+server <- function(input, output, session) {
+  output$greeting <- renderText({
+    paste(input$greeting_type, input$name, sep = ", ")
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+### App 2: Popular Baby Names
+Building a Shiny app is a modular process. You start with the UI, then you work on the server code, building outputs based on the user inputs. The more you practice this approach deliberately, the easier it will become to build good apps.
+
+You will now build a Shiny app that lets a user choose sex and year, and will display the top 10 most popular names in that year as a column plot of proportion of births (prop) by name (name). 
+
+```{r}
+ui <- fluidPage(
+  titlePanel("Most Popular Names"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput('sex', 'Select Sex', c("M", "F")),
+      sliderInput('year', 'Select Year', 1880, 2013, 1900)
+    ),
+    mainPanel(
+     plotOutput('plot')
+    )
+  )
+)
+server <- function(input, output, session) {
+  output$plot <- renderPlot({
+    top_names_by_sex_year <- get_top_names(input$year, input$sex) 
+    ggplot(top_names_by_sex_year, aes(x = name, y = prop)) +
+      geom_col()
+  })
+}
+shinyApp(ui = ui, server = server)
+```
+
+### App 3: Popular Baby Names Redux
+Great! Hope you enjoyed building that app displaying popular baby names as a column plot. Let us wrap this chapter up by enhancing the app we built earlier by adding a table showing the top 10 baby names as a tab.
+
+```{r}
+ui <- fluidPage(
+  titlePanel("Most Popular Names"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput('sex', 'Select Sex', c("M", "F")),
+      sliderInput('year', 'Select Year', 1880, 2013, 1900)
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel('Plot', plotOutput('plot')),
+        tabPanel('Table', tableOutput('table'))
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  output$plot <- renderPlot({
+    d <- get_top_names(input$year, input$sex) 
+    qplot(name, prop, data = d, geom = 'col')
+  })
+  
+  output$table <- renderTable({
+    get_top_names(input$year, input$sex) 
+  })
+}
+shinyApp(ui = ui, server = server)
 ```
 
 
-
-
-
-
-
-
-
-
-
 ## Reactive Programming
-### 
+### Add a reactive expression
+A reactive expression is an R expression that uses widget input and returns a value. The reactive expression will update this value whenever the original widget changes. Reactive expressions are lazy and cached.
+
+In this exercise, you will encapsulate a repeated computation as a reactive expression.
 
 
+```{r}
+server <- function(input, output, session) {
+  # CODE BELOW: Add a reactive expression rval_bmi to calculate BMI
+  rval_bmi <- reactive({
+    input$weight/(input$height^2)
+  })
+  output$bmi <- renderText({
+    # MODIFY CODE BELOW: Replace right-hand-side with reactive expression
+    bmi <- rval_bmi()
+    paste("Your BMI is", round(bmi, 1))
+  })
+  output$bmi_range <- renderText({
+    # MODIFY CODE BELOW: Replace right-hand-side with reactive expression
+    bmi <- rval_bmi()
+    bmi_status <- cut(bmi, 
+      breaks = c(0, 18.5, 24.9, 29.9, 40),
+      labels = c('underweight', 'healthy', 'overweight', 'obese')
+    )
+    paste("You are", bmi_status)
+  })
+}
+ui <- fluidPage(
+  titlePanel('BMI Calculator'),
+  sidebarLayout(
+    sidebarPanel(
+      numericInput('height', 'Enter your height in meters', 1.5, 1, 2),
+      numericInput('weight', 'Enter your weight in Kilograms', 60, 45, 120)
+    ),
+    mainPanel(
+      textOutput("bmi"),
+      textOutput("bmi_range")
+    )
+  )
+)
 
+shinyApp(ui = ui, server = server)
+```
 
+### Observers vs reactives
+- reactive() is for calculating values, without side effects
+- observe() is for calculating values, with side effects
+- reactive expressions return values, but observers do not
+
+### Add another reactive expression
+A reactive expression can call other reactive expressions. This allows you to modularize computations and ensure that they are NOT executed repeatedly. Mastering the use of reactive expressions is key to building performant Shiny applications.
+
+In this exercise, you will use a reactive expression to calculate the health status based on the BMI.
+
+```{r}
+server <- function(input, output, session) {
+  rval_bmi <- reactive({
+    input$weight/(input$height^2)
+  })
+  # CODE BELOW: Add a reactive expression rval_bmi_status to 
+  # return health status as underweight etc. based on inputs
+  rval_bmi_status <- reactive({
+    cut(rval_bmi(), 
+      breaks = c(0, 18.5, 24.9, 29.9, 40),
+      labels = c('underweight', 'healthy', 'overweight', 'obese')
+    )
+  })
+  output$bmi <- renderText({
+    bmi <- rval_bmi()
+    paste("Your BMI is", round(bmi, 1))
+  })
+  output$bmi_status <- renderText({
+    # MODIFY CODE BELOW: Replace right-hand-side with 
+    # reactive expression rval_bmi_status
+    bmi_status <- rval_bmi_status()
+    paste("You are", bmi_status)
+  })
+}
+ui <- fluidPage(
+  titlePanel('BMI Calculator'),
+  sidebarLayout(
+    sidebarPanel(
+      numericInput('height', 'Enter your height in meters', 1.5, 1, 2),
+      numericInput('weight', 'Enter your weight in Kilograms', 60, 45, 120)
+    ),
+    mainPanel(
+      textOutput("bmi"),
+      textOutput("bmi_status")
+    )
+  )
+)
+
+shinyApp(ui = ui, server = server)
+```
+
+### Add an observer to display notifications
+Recall that an observer is used for side effects, like displaying a plot, table, or text in the browser. By default an observer triggers an action, whenever one of its underlying dependencies change.
+
+In this exercise, you will use an observer to display a notification in the browser, using observe() and showNotification(). As we are triggering an action using an observer, we do NOT need to use a render***() function or assign the results to an output.
+
+```{r}
+ui <- fluidPage(
+  textInput('name', 'Enter your name')
+)
+
+server <- function(input, output, session) {
+  # CODE BELOW: Add an observer to display a notification
+  # 'You have entered the name xxxx' where xxxx is the name
+  observe({
+    showNotification(
+      paste('You have entered the name', input$name)
+    )
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+### Stop reactions with isolate()
+Ordinarily, the simple act of reading a reactive value is sufficient to set up a relationship, where a change to the reactive value will cause the calling expression to re-execute. The isolate() function allows an expression to read a reactive value without triggering re-execution when its value changes.
+
+In this exercise, you will use the isolate() function to stop reactive flow.
+
+```{r}
+server <- function(input, output, session) {
+  rval_bmi <- reactive({
+    input$weight/(input$height^2)
+  })
+  output$bmi <- renderText({
+    bmi <- rval_bmi()
+    # MODIFY CODE BELOW: 
+    # Use isolate to stop output from updating when name changes.
+    paste("Hi", isolate({input$name}), ". Your BMI is", round(bmi, 1))
+  })
+}
+ui <- fluidPage(
+  titlePanel('BMI Calculator'),
+  sidebarLayout(
+    sidebarPanel(
+      textInput('name', 'Enter your name'),
+      numericInput('height', 'Enter your height (in m)', 1.5, 1, 2, step = 0.1),
+      numericInput('weight', 'Enter your weight (in Kg)', 60, 45, 120)
+    ),
+    mainPanel(
+      textOutput("bmi")
+    )
+  )
+)
+
+shinyApp(ui = ui, server = server)
+```
+
+### Delay reactions with eventReactive()
+Shiny's reactive programming framework is designed such that any changes to inputs automatically updates the outputs that depend on it. In some situations, we might want more explicitly control the trigger that causes the update.
+
+The function eventReactive() is used to compute a reactive value that only updates in response to a specific event.
+
+```{r}
+server <- function(input, output, session) {
+  # MODIFY CODE BELOW: Use eventReactive to delay the execution of the
+  # calculation until the user clicks on the show_bmi button (Show BMI)
+  rval_bmi <- eventReactive(input$show_bmi, {
+    input$weight/(input$height^2)
+  })
+  output$bmi <- renderText({
+    bmi <- rval_bmi()
+    paste("Hi", input$name, ". Your BMI is", round(bmi, 1))
+  })
+}
+
+ui <- fluidPage(
+  titlePanel('BMI Calculator'),
+  sidebarLayout(
+    sidebarPanel(
+      textInput('name', 'Enter your name'),
+      numericInput('height', 'Enter height (in m)', 1.5, 1, 2, step = 0.1),
+      numericInput('weight', 'Enter weight (in Kg)', 60, 45, 120),
+      actionButton("show_bmi", "Show BMI")
+    ),
+    mainPanel(
+      textOutput("bmi")
+    )
+  )
+)
+
+shinyApp(ui = ui, server = server)
+```
+
+### Trigger reactions with observeEvent()
+There are times when you want to perform an action in response to an event. For example, you might want to let the app user download a table as a CSV file, when they click on a "Download" button. Or, you might want to display a notification or modal dialog, in response to a click.
+
+The observeEvent() function allows you to achieve this. It accepts two arguments:
+
+The event you want to respond to.
+The function that should be called whenever the event occurs.
+In this exercise, you will use observeEvent() to display a modal dialog with help text, when the user clicks on a button labelled "Help". The help text has already been assigned to the variable bmi_help_text.
+
+```{r}
+server <- function(input, output, session) {
+  # MODIFY CODE BELOW: Wrap in observeEvent() so the help text 
+  # is displayed when a user clicks on the Help button.
+  observeEvent(input$show_help, {
+     # Display a modal dialog with bmi_help_text
+     # MODIFY CODE BELOW: Uncomment code
+     showModal(modalDialog(bmi_help_text))
+  })
+  rv_bmi <- eventReactive(input$show_bmi, {
+    input$weight/(input$height^2)
+  })
+  output$bmi <- renderText({
+    bmi <- rv_bmi()
+    paste("Hi", input$name, ". Your BMI is", round(bmi, 1))
+  })
+}
+
+ui <- fluidPage(
+  titlePanel('BMI Calculator'),
+  sidebarLayout(
+    sidebarPanel(
+      textInput('name', 'Enter your name'),
+      numericInput('height', 'Enter your height in meters', 1.5, 1, 2),
+      numericInput('weight', 'Enter your weight in Kilograms', 60, 45, 120),
+      actionButton("show_bmi", "Show BMI"),
+      # CODE BELOW: Add an action button named "show_help"
+      actionButton("show_help", "Help")
+    ),
+    mainPanel(
+      textOutput("bmi")
+    )
+  )
+)
+
+shinyApp(ui = ui, server = server)
+```
+
+### Convert height from inches to centimeters
+Earlier in the chapter, we practiced stopping, delaying, and triggering apps. This is a very common pattern of programming in Shiny that enables your apps to be optimized for speed (and only re-run when something is updated and your user would like to re-run the app.)
+
+In this exercise, you'll practice some of those concepts again, just to make sure you truly understand them. Instead of calculating BMI, this app converts height in inches to centimeters.
+
+```{r}
+server <- function(input, output, session) {
+  # MODIFY CODE BELOW: Delay the height calculation until
+  # the show button is pressed
+  rval_height_cm <- eventReactive(input$show_height_cm, {
+    input$height * 2.54
+  })
+  
+  output$height_cm <- renderText({
+    height_cm <- rval_height_cm()
+    	paste("Your height in centimeters is", height_cm, "cm")
+    })
+}
+
+ui <- fluidPage(
+  titlePanel("Inches to Centimeters Conversion"),
+  sidebarLayout(
+    sidebarPanel(
+      numericInput("height", "Height (in)", 60),
+      actionButton("show_height_cm", "Show height in cm")
+    ),
+    mainPanel(
+      textOutput("height_cm")
+    )
+  )
+)
+
+shinyApp(ui = ui, server = server)
+```
 
 ## Build Shiny Apps
-### 
+### Alien sightings: add inputs
+The National UFO Reporting Center (NUFORC) has collected sightings data throughout the last century. This app is going to allow users to select a U.S. state and a time period in which the sightings occurred.
 
+```{r}
+ui <- fluidPage(
+  # CODE BELOW: Add a title
+  titlePanel("UFO Sightings"),
+  sidebarLayout(
+    sidebarPanel(
+      # CODE BELOW: One input to select a U.S. state
+      # And one input to select a range of dates
+      selectInput("state", 
+        "Choose a U.S. state:", 
+        choices = unique(usa_ufo_sightings$state)),
+      dateRangeInput("dates", "Choose a date range:",
+        start = "1920-01-01",
+        end = "1950-01-01"
+      )
+  	),
+  	mainPanel()
+  )
+)
 
+server <- function(input, output) {
 
+}
 
+shinyApp(ui, server)
+```
 
+### Alien sightings: add outputs
+Now that the dashboard has inputs, you should build your outputs to actually see information about the reported UFO sightings.
 
+Recall there will be two, a plot and a table. The plot should show the number sighted, by shape, for the selected state and time period. The table should show, for the selected state and time period, the number sighted, plus the average, median, minimum, and maximum duration (duration_sec) of the sightings. This will require using dplyr, or a method of your choosing, to manipulate the usa_ufo_sightings data.
 
+```{r}
+server <- function(input, output) {
+  # CODE BELOW: Create a plot output name 'shapes', of sightings by shape,
+  # For the selected inputs
+  output$shapes <- renderPlot({
+    usa_ufo_sightings %>%
+      filter(state == input$state,
+             date_sighted >= input$dates[1],
+             date_sighted <= input$dates[2]) %>%
+      ggplot(aes(shape)) +
+      geom_bar() +
+      labs(x = "Shape", y = "# Sighted")
+  })
+  # CODE BELOW: Create a table output named 'duration_table', by shape, 
+  # of # sighted, plus mean, median, max, and min duration of sightings
+  # for the selected inputs
+  output$duration_table <- renderTable({
+    usa_ufo_sightings %>%
+      filter(
+        state == input$state,
+        date_sighted >= input$dates[1],
+        date_sighted <= input$dates[2]
+      ) %>%
+      group_by(shape) %>%
+      summarize(
+        nb_sighted = n(),
+        avg_duration = mean(duration_sec),
+        median_duration = median(duration_sec),
+        min_duration = min(duration_sec),
+        max_duration = max(duration_sec)
+      )
+  })
+}
 
+ui <- fluidPage(
+  titlePanel("UFO Sightings"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("state", "Choose a U.S. state:", choices = unique(usa_ufo_sightings$state)),
+      dateRangeInput("dates", "Choose a date range:",
+                     start = "1920-01-01",
+                     end = "1950-01-01")
+    ),
+    mainPanel(
+      # Add plot output named 'shapes'
+      plotOutput("shapes"),
+      # Add table output named 'duration_table'
+      tableOutput("duration_table")
+    )
+  )
+)
+
+shinyApp(ui, server)
+```
+
+### Alien sightings: tab layout
+As-is, the app is sort of busy with the graph on top of the table. Given that this is a dashboard, it might be nice to instead separate the two outputs.
+
+The last step in building your dashboard is to take the plotOutput() and tableOutput() you've built and add the tab layout.
+
+```{r}
+ui <- fluidPage(
+  titlePanel("UFO Sightings"),
+  sidebarPanel(
+    selectInput("state", "Choose a U.S. state:", choices = unique(usa_ufo_sightings$state)),
+    dateRangeInput("dates", "Choose a date range:",
+      start = "1920-01-01",
+      end = "1950-01-01"
+    )
+  ),
+  # MODIFY CODE BELOW: Create a tab layout for the dashboard
+  mainPanel(
+    tabsetPanel(
+      tabPanel("Number sighted", plotOutput("shapes")),
+      tabPanel("Duration table", tableOutput("duration_table"))
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$shapes <- renderPlot({
+    usa_ufo_sightings %>%
+      filter(
+        state == input$state,
+        date_sighted >= input$dates[1],
+        date_sighted <= input$dates[2]
+      ) %>%
+      ggplot(aes(shape)) +
+      geom_bar() +
+      labs(
+        x = "Shape",
+        y = "# Sighted"
+      )
+  })
+
+  output$duration_table <- renderTable({
+    usa_ufo_sightings %>%
+      filter(
+        state == input$state,
+        date_sighted >= input$dates[1],
+        date_sighted <= input$dates[2]
+      ) %>%
+      group_by(shape) %>%
+      summarize(
+        nb_sighted = n(),
+        avg_duration_min = mean(duration_sec) / 60,
+        median_duration_min = median(duration_sec) / 60,
+        min_duration_min = min(duration_sec) / 60,
+        max_duration_min = max(duration_sec) / 60
+      )
+  })
+}
+
+shinyApp(ui, server)
+```
+
+### Explore the Mental Health in Tech 2014 Survey
+Don't be intimidated, but in this exercise, you're going to build the entirety of this app (minus the custom error message) in one go!
+
+For this app, you'll be using the questions "Do you think that discussing a mental health issue with your employer would have negative consequences?" (the mental_health_consequence variable) and "Do you feel that your employer takes mental health as seriously as physical health?" (mental_vs_physical) as multi-selector inputs, then displaying a histogram of the Age of respondents. To see the choices for these variables, count() them in the console.
+
+```{r}
+ui <- fluidPage(
+  # CODE BELOW: Add an appropriate title
+  titlePanel("2014 Mental Health in Tech Survey"),
+  sidebarPanel(
+    # CODE BELOW: Add a checkboxGroupInput
+    checkboxGroupInput(
+      inputId = "mental_health_consequence",
+      label = "Do you think that discussing a mental health issue with your employer would have negative consequences?",
+      choices = c("Maybe", "Yes", "No"),
+      selected = "Maybe"
+    ),
+    # CODE BELOW: Add a pickerInput
+    pickerInput(
+      inputId = "mental_vs_physical",
+      label = "Do you feel that your employer takes mental health as seriously as physical health?",
+      choices = c("Don't Know", "No", "Yes"),
+      multiple = TRUE
+    )
+  ),
+  mainPanel(
+    # CODE BELOW: Display the output
+    plotOutput("age")
+  )
+)
+
+server <- function(input, output, session) {
+  # CODE BELOW: Build a histogram of the age of respondents
+  # Filtered by the two inputs
+  output$age <- renderPlot({
+    mental_health_survey %>%
+      filter(
+        mental_health_consequence %in% input$mental_health_consequence,
+        mental_vs_physical %in% input$mental_vs_physical
+      ) %>%
+      ggplot(aes(Age)) +
+      geom_histogram()
+  })
+}
+
+shinyApp(ui, server)
+```
+
+### Validate that a user made a selection
+Recall from the video that though it is often good practice to select a default value for your selector inputs, if one should be excluded, you can throw a custom error message to your users that clues them in on what they need to do for the app to run successfully.
+
+We saw in the last exercise that, without a default value for the pickerInput(), the plot is simply blank. Instead of a blank plot, in this exercise you'll show users a custom error message telling them to make the correct selection needed to get the app working.
+
+```{r}
+server <- function(input, output, session) {
+  output$age <- renderPlot({
+    # MODIFY CODE BELOW: Add validation that user selected a 3rd input
+    validate(
+      need(
+        input$mental_vs_physical != "", 
+        "Make a selection for mental vs. physical health."
+      )
+    )
+
+    mental_health_survey %>%
+      filter(
+        work_interfere == input$work_interfere,
+        mental_health_consequence %in% input$mental_health_consequence,
+        mental_vs_physical %in% input$mental_vs_physical
+      ) %>%
+      ggplot(aes(Age)) +
+      geom_histogram()
+  })
+}
+
+ui <- fluidPage(
+  titlePanel("2014 Mental Health in Tech Survey"),
+  sidebarPanel(
+    sliderTextInput(
+      inputId = "work_interfere",
+      label = "If you have a mental health condition, do you feel that it interferes with your work?", 
+      grid = TRUE,
+      force_edges = TRUE,
+      choices = c("Never", "Rarely", "Sometimes", "Often")
+    ),
+    checkboxGroupInput(
+      inputId = "mental_health_consequence",
+      label = "Do you think that discussing a mental health issue with your employer would have negative consequences?", 
+      choices = c("Maybe", "Yes", "No"),
+      selected = "Maybe"
+    ),
+    pickerInput(
+      inputId = "mental_vs_physical",
+      label = "Do you feel that your employer takes mental health as seriously as physical health?", 
+      choices = c("Don't Know", "No", "Yes"),
+      multiple = TRUE
+    )
+  ),
+  mainPanel(
+    plotOutput("age")  
+  )
+)
+
+shinyApp(ui, server)
+```
+
+### Explore cuisines: top ingredients
+Food has universal appeal, and the amazing array of dishes one can concoct with the multitude of ingredients leads to near infinite variety! In this exercise, you will use a dataset named recipes that contains recipes, the cuisine it belongs to, and the ingredients it uses, to build a Shiny app that lets the user explore the most used ingredients by cuisine.
+
+```{r}
+ui <- fluidPage(
+  titlePanel('Explore Cuisines'),
+  sidebarLayout(
+    sidebarPanel(
+      # CODE BELOW: Add an input named "cuisine" to select a cuisine
+      selectInput('cuisine', 'Select Cuisine', unique(recipes$cuisine)),
+      # Code BELOW: Add an input named "nb_ingredients" to select #ingredients
+      sliderInput('nb_ingredients', 'Select No. of Ingredients', 5, 100, 20),
+    ),
+    mainPanel(
+      # CODE BELOW: Add a DT output named "dt_top_ingredients"
+      DT::DTOutput('dt_top_ingredients')
+    )
+  )
+)
+server <- function(input, output, session) {
+  # CODE BELOW: Render the top ingredients in a chosen cuisine as 
+  # an interactive data table and assign it to output object `dt_top_ingredients`
+  output$dt_top_ingredients <- DT::renderDT({
+    recipes %>% 
+      filter(cuisine == input$cuisine) %>% 
+      count(ingredient, name = 'nb_recipes') %>% 
+      arrange(desc(nb_recipes)) %>% 
+      head(input$nb_ingredients)
+  })
+}
+shinyApp(ui, server)
+```
+
+### Explore cuisines: top ingredients redux
+Each cuisine is distinct because of a small set of distinct ingredients. We can't surface these by looking at the most popular ingredients, since they're the bread-and-butter ingredients of cooking like salt or sugar.
+
+Another metric that can aid us in this quest is the term frequency–inverse document frequency (TFIDF), a numerical statistic that is intended to reflect how important a word (ingredient) is to a document (cuisine) in a collection or corpus (recipes).
+
+We already precomputed the tf_idf for you and created an enriched dataset named recipes_enriched. Your goal is to create a Shiny app that displays a horizontal bar plot of the top distinctive ingredients in a cuisine, as measured by tf_idf.
+
+```{r}
+ui <- fluidPage(
+  titlePanel('Explore Cuisines'),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput('cuisine', 'Select Cuisine', unique(recipes$cuisine)),
+      sliderInput('nb_ingredients', 'Select No. of Ingredients', 5, 100, 10),
+    ),
+    mainPanel(
+      tabsetPanel(
+        # CODE BELOW: Add a plotly output named "plot_top_ingredients"
+        tabPanel('Plot', plotly::plotlyOutput('plot_top_ingredients')),
+        tabPanel('Table', DT::DTOutput('dt_top_ingredients'))
+      )
+    )
+  )
+)
+server <- function(input, output, session) {
+  # CODE BELOW: Add a reactive expression named `rval_top_ingredients` that
+  # filters `recipes_enriched` for the selected cuisine and top ingredients
+  # based on the tf_idf value.
+  rval_top_ingredients <- reactive({
+    recipes_enriched %>% 
+      filter(cuisine == input$cuisine) %>% 
+      arrange(desc(tf_idf)) %>% 
+      head(input$nb_ingredients)
+  })
+  # CODE BELOW: Render a horizontal bar plot of top ingredients and 
+  # the tf_idf of recipes they get used in, and assign it to an output named 
+  # `plot_top_ingredients` 
+  output$plot_top_ingredients <- plotly::renderPlotly({
+    rval_top_ingredients() %>%
+      ggplot(aes(x = ingredient, y = tf_idf)) +
+      geom_col() +
+      coord_flip()
+  })
+  
+  output$dt_top_ingredients <- DT::renderDT({
+    recipes %>% 
+      filter(cuisine == input$cuisine) %>% 
+      count(ingredient, name = 'nb_recipes') %>% 
+      arrange(desc(nb_recipes)) %>% 
+      head(input$nb_ingredients)
+  })
+}
+shinyApp(ui, server)
+```
+
+### Explore cuisines: wordclouds
+Hope you are having fun building these foody Shiny apps! A handy way to visualize a lot of data is wordclouds. In this exercise, you will extend the Shiny app we built previously and add a new tab that displays the top distinctive ingredients as an interactive wordcloud.
+
+```{r}
+ui <- fluidPage(
+  titlePanel('Explore Cuisines'),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput('cuisine', 'Select Cuisine', unique(recipes$cuisine)),
+      sliderInput('nb_ingredients', 'Select No. of Ingredients', 5, 100, 20),
+    ),
+    mainPanel(
+      tabsetPanel(
+        # CODE BELOW: Add `d3wordcloudOutput` named `wc_ingredients` in a `tabPanel`
+        tabPanel('Word Cloud', d3wordcloud::d3wordcloudOutput('wc_ingredients', height = '400')),
+        tabPanel('Plot', plotly::plotlyOutput('plot_top_ingredients')),
+        tabPanel('Table', DT::DTOutput('dt_top_ingredients'))
+      )
+    )
+  )
+)
+server <- function(input, output, session){
+  # CODE BELOW: Render an interactive wordcloud of top distinctive ingredients 
+  # and the number of recipes they get used in, using 
+  # `d3wordcloud::renderD3wordcloud`, and assign it to an output named
+  # `wc_ingredients`.
+  output$wc_ingredients <- d3wordcloud::renderD3wordcloud({
+     ingredients_df <- rval_top_ingredients()
+     d3wordcloud(ingredients_df$ingredient, ingredients_df$nb_recipes, tooltip = TRUE)
+  })
+  rval_top_ingredients <- reactive({
+    recipes_enriched %>% 
+      filter(cuisine == input$cuisine) %>% 
+      arrange(desc(tf_idf)) %>% 
+      head(input$nb_ingredients) %>% 
+      mutate(ingredient = forcats::fct_reorder(ingredient, tf_idf))
+  })
+  output$plot_top_ingredients <- plotly::renderPlotly({
+    rval_top_ingredients() %>%
+      ggplot(aes(x = ingredient, y = tf_idf)) +
+      geom_col() +
+      coord_flip()
+  })
+  output$dt_top_ingredients <- DT::renderDT({
+    recipes %>% 
+      filter(cuisine == input$cuisine) %>% 
+      count(ingredient, name = 'nb_recipes') %>% 
+      arrange(desc(nb_recipes)) %>% 
+      head(input$nb_ingredients)
+  })
+}
+shinyApp(ui = ui, server= server)
+```
+
+### Mass shootings: add inputs
+Mass Shootings have been a topic of intense discussion in the United States. A public database of mass shootings since 1982 has been made available by the Mother Jones, a non-profit organization. Over the next three exercises, you will build a Shiny app to explore these shootings on an interactive map.
+
+In this exercise, you will add a slider input to filter on fatalities and a date range input to filter on a range of dates.
+
+```{r}
+ui <- bootstrapPage(
+  theme = shinythemes::shinytheme('simplex'),
+  leaflet::leafletOutput('map', height = '100%', width = '100%'),
+  absolutePanel(top = 10, right = 10, id = 'controls',
+    # CODE BELOW: Add slider input named nb_fatalities
+    sliderInput('nb_fatalities', 'Minimum Fatalities', 1, 40, 10),
+    # CODE BELOW: Add date range input named date_range
+    dateRangeInput('date_range', 'Select Date', "2010-01-01", "2019-12-01")
+  ),
+  tags$style(type = "text/css", "
+    html, body {width:100%;height:100%}     
+    #controls{background-color:white;padding:20px;}
+  ")
+)
+server <- function(input, output, session) {
+  output$map <- leaflet::renderLeaflet({
+    leaflet() %>% 
+      addTiles() %>%
+      setView( -98.58, 39.82, zoom = 5) %>% 
+      addTiles()
+  })
+}
+
+shinyApp(ui, server)
+```
+
+### Mass shootings: modify output
+In this exercise, you will extend the Shiny app you built previously so that red circles sized based on the number of fatalities appear on the interactive map, along with a summary of the case when the circle is clicked. 
+
+```{r}
+server <- function(input, output, session) {
+  rval_mass_shootings <- reactive({
+    # MODIFY CODE BELOW: Filter mass_shootings on nb_fatalities and 
+    # selected date_range.
+    mass_shootings %>% 
+      filter(
+        date >= input$date_range[1],
+        date <= input$date_range[2],
+        fatalities >= input$nb_fatalities
+      )
+  })
+  output$map <- leaflet::renderLeaflet({
+    rval_mass_shootings() %>%
+      leaflet() %>% 
+      addTiles() %>%
+      setView( -98.58, 39.82, zoom = 5) %>% 
+      addTiles() %>% 
+      addCircleMarkers(
+        # CODE BELOW: Add parameters popup and radius and map them
+        # to the summary and fatalities columns
+        popup = ~ summary, radius = ~ fatalities,
+        fillColor = 'red', color = 'red', weight = 1
+      )
+  })
+}
+ui <- bootstrapPage(
+  theme = shinythemes::shinytheme('simplex'),
+  leaflet::leafletOutput('map', height = '100%', width = '100%'),
+  absolutePanel(top = 10, right = 10, id = 'controls',
+    sliderInput('nb_fatalities', 'Minimum Fatalities', 1, 40, 10),
+    dateRangeInput('date_range', 'Select Date', "2010-01-01", "2019-12-01")
+  ),
+  tags$style(type = "text/css", "
+    html, body {width:100%;height:100%}     
+    #controls{background-color:white;padding:20px;}
+  ")
+)
+
+shinyApp(ui, server)
+```
+
+### Mass shootings: display help
+It is always useful to provide users with more context about your app. One way to do this is by adding an About button to the app and display the context as a modal dialog.
+
+This is exactly what we will be doing in this exercise. Your app will resemble the image in this screenshot, when the user clicks on the "About" button.
+
+```{r}
+ui <- bootstrapPage(
+  theme = shinythemes::shinytheme('simplex'),
+  leaflet::leafletOutput('map', width = '100%', height = '100%'),
+  absolutePanel(top = 10, right = 10, id = 'controls',
+    sliderInput('nb_fatalities', 'Minimum Fatalities', 1, 40, 10),
+    dateRangeInput(
+      'date_range', 'Select Date', "2010-01-01", "2019-12-01"
+    ),
+    # CODE BELOW: Add an action button named show_about
+    actionButton('show_about', 'About')
+  ),
+  tags$style(type = "text/css", "
+    html, body {width:100%;height:100%}     
+    #controls{background-color:white;padding:20px;}
+  ")
+)
+server <- function(input, output, session) {
+  # CODE BELOW: Use observeEvent to display a modal dialog
+  # with the help text stored in text_about.
+  observeEvent(input$show_about, {
+    showModal(modalDialog(text_about, title = 'About'))
+  })
+  output$map <- leaflet::renderLeaflet({
+    mass_shootings %>% 
+      filter(
+        date >= input$date_range[1],
+        date <= input$date_range[2],
+        fatalities >= input$nb_fatalities
+      ) %>% 
+      leaflet() %>% 
+      setView( -98.58, 39.82, zoom = 5) %>% 
+      addTiles() %>% 
+      addCircleMarkers(
+        popup = ~ summary, radius = ~ sqrt(fatalities)*3,
+        fillColor = 'red', color = 'red', weight = 1
+      )
+  })
+}
+
+shinyApp(ui, server)
+```
