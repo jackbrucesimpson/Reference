@@ -31,16 +31,662 @@ In the previous exercise, addTiles() added the default OpenStreetMap (OSM) tile 
 The leaflet package comes with more than 100 map tiles that you can use. These tiles are stored in a list called providers and can be added to your map using addProviderTiles() instead of addTiles().
 
 ```{r}
+# Print the providers list included in the leaflet library
+providers
+
+# Print only the names of the map tiles in the providers list 
+names(providers)
+
+# Use str_detect() to determine if the name of each provider tile contains the string "CartoDB"
+str_detect(names(providers), "CartoDB")
+
+# Use str_detect() to print only the provider tile names that include the string "CartoDB"
+names(providers)[str_detect(names(providers), "CartoDB")]
+```
+
+### Adding a Custom Map Tile
+Did any tile names look familiar? If you have worked with the mapping software you may recognize the name ESRI or CartoDB. We will primarily use CartoDB provider tiles, but feel free to try others, like Esri. To add a custom provider tile to our map we will use the addProviderTiles() function. The first argument to addProviderTiles() is your leaflet map, which allows us to pipe leaflet() output directly into addProviderTiles(). The second argument is provider, which accepts any of the map tiles included in the providers list.
+
+Familiarize yourself with the SCRIPT.R and HTML VIEWER tabs. Click back and forth to type your code and view your maps.
+
+```{r}
+# Change addTiles() to addProviderTiles() and set the provider argument to "CartoDB"
+leaflet() %>% 
+    addProviderTiles(provider = 'CartoDB')
+
+# Create a leaflet map that uses the Esri provider tile 
+leaflet() %>% 
+    addProviderTiles(provider = 'Esri')
+
+# Create a leaflet map that uses the CartoDB.PositronNoLabels provider tile
+leaflet() %>% 
+    addProviderTiles(provider = 'CartoDB.PositronNoLabels')
+```
+
+### A Map with a View I
+You may have noticed that, by default, maps are zoomed out to the farthest level. Rather than manually zooming and panning, we can load the map centered on a particular point using the setView() function. Currently, DataCamp has offices at the following locations:
+- 350 5th Ave, Floor 77, New York, NY 10118
+- Martelarenlaan 38, 3010 Kessel-Lo, Belgium
+
+These addresses were converted to coordinates using the geocode() function in the ggmaps package.
+
+NYC: (-73.98575, 40.74856)
+Belgium: (4.717863, 50.881363)
+
+```{r}
+# Map with CartoDB tile centered on DataCamp's NYC office with zoom of 6
+leaflet()  %>% 
+    addProviderTiles("CartoDB")  %>% 
+    setView(lng = -73.98575, lat = 40.74856, zoom = 6)
+
+# Map with CartoDB.PositronNoLabels tile centered on DataCamp's Belgium office with zoom of 4
+leaflet() %>% 
+    addProviderTiles("CartoDB.PositronNoLabels") %>% 
+    setView(lng = dc_hq$lon[2], lat = dc_hq$lat[2], zoom = 4)
+```
+
+### A Map with a Narrower View
+We can limit users' ability to pan away from the map's focus using the options argument in the leaflet() function. By setting minZoom anddragging, we can create an interactive web map that will always be focused on a specific area.
+
+Alternatively, if we want our users to be able to drag the map while ensuring that they do not stray too far, we can set the maps maximum boundaries by specifying two diagonal corners of a rectangle.
+
+You'll use dc_hq to create a map with the "CartoDB" provider tile that is centered on DataCamp's Belgium office.
+
+```{r}
+leaflet(options = leafletOptions(
+                    # Set minZoom and dragging 
+                    minZoom = 12, dragging = TRUE))  %>% 
+  addProviderTiles("CartoDB")  %>% 
+  
+  # Set default zoom level 
+  setView(lng = dc_hq$lon[2], lat = dc_hq$lat[2], zoom = 14) %>% 
+  
+  # Set max bounds of map 
+  setMaxBounds(lng1 = dc_hq$lon[2] + .05, 
+               lat1 = dc_hq$lat[2] + .05, 
+               lng2 = dc_hq$lon[2] - .05, 
+               lat2 = dc_hq$lat[2] - .05) 
+```
+
+### Mark it
+So far we have been creating maps with a single layer: a base map. We can add layers to this base map similar to how you add layers to a plot in ggplot2. One of the most common layers to add to a leaflet map is location markers, which you can add by piping the result of addTiles() or addProviderTiles() into the add markers function.
+
+For example, if we plot DataCamp's NYC HQ by passing the coordinates to addMarkers() as numeric vectors with one element, our web map will place a blue drop pin at the coordinate. In chapters 2 and 3, we will review some options for customizing these markers.
+
+```{r}
+# Plot DataCamp's NYC HQ
+leaflet() %>% 
+    addProviderTiles("CartoDB") %>% 
+    addMarkers(lng = dc_hq$lon[1], lat = dc_hq$lat[1])
+
+# Plot DataCamp's NYC HQ with zoom of 12    
+leaflet() %>% 
+    addProviderTiles("CartoDB") %>% 
+    addMarkers(lng = -73.98575, lat = 40.74856)  %>% 
+    setView(lng = -73.98575, lat = 40.74856, zoom = 12)    
+
+# Plot both DataCamp's NYC and Belgium locations
+leaflet() %>% 
+    addProviderTiles("CartoDB") %>% 
+    addMarkers(lng = dc_hq$lon, lat = dc_hq$lat)
+```
+
+### Adding Popups and Storing your Map
+To make our map more informative we can add popups. To add popups that appear when a marker is clicked we need to specify the popup argument in the addMarkers() function. Once we have a map we would like to preserve, we can store it in an object. Then we can pipe this object into functions to add or edit the map's layers. Let's try adding popups to both DataCamp location markers and storing our map in an object.
+
+```{r}
+# Store leaflet hq map in an object called map
+ map <- leaflet() %>%
+          addProviderTiles("CartoDB") %>%
+          # Use dc_hq to add the hq column as popups
+          addMarkers(lng = dc_hq$lon, lat = dc_hq$lat,
+                     popup = dc_hq$hq)
+
+# Center the view of map on the Belgium HQ with a zoom of 5 
+map_zoom <- map %>%
+      setView(lat = 50.881363, lng = 4.717863,
+              zoom = 5)
+
+# Print map_zoom
+map
+```
+
+## Plotting Points
+### Cleaning up the Base Map
+If you are storing leaflet maps in objects, there will come a time when you need to remove markers or reset the view. You can accomplish these tasks with the following functions.
+
+clearMarkers()- Remove one or more features from a map
+clearBounds()- Clear bounds and automatically determine bounds based on map elements
+
+```{r}
+# Remove markers, reset bounds, and store the updated map in the m object
+# Remove markers, reset bounds, and store the updated map in the m object
+map_clear <- map %>%
+        clearMarkers() %>% 
+        clearBounds()
+
+# Print the cleared map
+map_clear
+```
+
+### Exploring the IPEDS Data
+Most analyses require data wrangling. Luckily, there are many functions in the tidyverse that facilitate data frame cleaning. For example, the drop_na() function will remove observations with missing values. By default, drop_na() will check all columns for missing values and will remove all observations with one or more missing values.
+
+```{r}
+# Remove colleges with missing sector information
+ipeds <- 
+    ipeds_missing %>% 
+    drop_na()
+
+# Count the number of four-year colleges in each state
+ipeds %>% 
+    group_by(state)  %>% 
+    count()
+
+# Create a list of US States in descending order by the number of colleges in each state
+ipeds  %>% 
+    group_by(state)  %>% 
+    count()  %>% 
+    arrange(desc(n))
+```
+
+### California Colleges
+Now it is your turn to map all of the colleges in a state. In this exercise, we'll apply our example of mapping Maine's colleges to California's colleges. The first step is to set up your data by filtering the ipeds data frame to include only colleges in California.
+
+```{r}
+# Create a dataframe called `ca` with data on only colleges in California
+ca <- ipeds %>%
+        filter(state == "CA")
+
+# Use `addMarkers` to plot all of the colleges in `ca` on the `m` leaflet map
+map %>%
+    addMarkers(lng = ca$lng, lat = ca$lat)
+```
+
+### The City of Colleges
+Based on our map of California colleges it appears that there is a cluster of colleges in and around the City of Angels (e.g., Los Angeles). Let's take a closer look at these institutions on our leaflet map.
+
+The coordinates for the center of LA are provided for you in the la_coords data frame.
+
+```{r}
+# Center the map on LA 
+map %>% 
+    addMarkers(data = ca) %>% 
+    setView(lat = la_coords$lat, lng = la_coords$lon, zoom = 12)
+
+# Set the zoom level to 8 and store in the map_zoom object
+map_zoom <- 
+    map %>% 
+      addMarkers(data = ca) %>% 
+      setView(lat = la_coords$lat, lng = la_coords$lon, zoom = 8)
+      
+map_zoom
+```
+
+### Circle Markers
+Circle markers are notably different from pin markers:
+- We can control their size
+- They do not "stand-up" on the map
+- We can more easily change their color
+- There are many ways to customize circle markers and the design of your leaflet map.
+
+The first argument map takes a leaflet object, which we will pipe directly into addCircleMarkers(). lng and lat are the coordinates we are mapping. The other arguments can customize the appearance and information presented by each marker.
+
+```{r}
+# Clear the markers from the map 
+map2 <- map %>% 
+            clearMarkers()
+            addCircleMarkers(lng = ca$lng, lat = ca$lat,
+                     radius = 2, color = "red")
+```
+
+### Making our Map Pop
+Similar to building a plot with ggplot2 or manipulating data with dplyr, your map needs to be stored in an object if you reference it later in your code.
+
+Speaking of dplyr, the %>% operator can pipe data into the function chain that creates a leaflet map. Piping makes our code more readable and allows us to refer to variables using the ~ operator rather than repeatedly specifying the data frame.
+
+The color argument in addCircleMarkers() takes the name of a color or a hex code. For example, red or #FF0000.
+
+```{r}
+# Add circle markers with popups for college names
+map %>% 
+    addCircleMarkers(data = ca, radius = 2, popup = ~name)
+
+# Add circle markers with popups for college names
+map %>%
+    addCircleMarkers(data = ca, radius = 2, popup = ~name)
+
+# Change circle markers' color to #2cb42c and store map in map_color object
+map_color <- map %>% 
+    addCircleMarkers(data = ca, radius = 2, color = '#2cb42c', popup = ~name)
+
 
 ```
 
-### 
+### Building a Better Pop-up
+With the paste0() function and a few html tags, we can customize our popups. paste0() converts its arguments to characters and combines them into a single string without separating the arguments.
 
-## Plotting Points
-### 
+We can use the <br/> tag to create a line break to have each element appear on a separate line.
+
+To distinguish different data elements, we can make the name of each college italics by wrapping the name variable in <i></i>
+
+```{r}
+# Clear the bounds and markers on the map object and store in map2
+map2 <- map %>% 
+            clearBounds() %>% 
+            clearMarkers()
+
+# Add circle markers with popups that display both the institution name and sector
+map2 %>% 
+    addCircleMarkers(data = ca, radius = 2, 
+                     popup = ~paste0(name, "<br/>", ~sector_label))
+
+# Add circle markers with popups that display both the institution name and sector
+map2 %>% 
+    addCircleMarkers(data = ca, radius = 2, 
+                     popup = ~paste0(name, "<br/>", sector_label))
+
+# Make the institution name in each popup bold
+map2 %>% 
+    addCircleMarkers(data = ca, radius = 2, 
+                     popup = ~paste0("<b>", name, "</b>", "<br/>", sector_label))
+```
+
+### Swapping Popups for Labels
+Popups are great, but they require a little extra effort. That is when labels come to our the aid. Using the label argument in the addCircleMarkers() function we can get more information about one of our markers with a simple hover!
+
+```{r}
+# Add circle markers with labels identifying the name of each college
+map %>% 
+    addCircleMarkers(data = ca, radius = 2, label = ~name)
+
+# Use paste0 to add sector information to the label inside parentheses 
+map %>% 
+    addCircleMarkers(data = ca, radius = 2, label = ~paste0(name, " (", sector_label, ")"))
+```
+
+### Creating a Color Palette using colorFactor
+So far we have only used color to customize the style of our map. With colorFactor() we can create a color palette that maps colors the levels of a factor variable. If you are interested in using a continuous variable to color a map see colorNumeric().
+
+```{r}
+# Make a color palette called pal for the values of `sector_label` using `colorFactor()`  
+# Colors should be: "red", "blue", and "#9b4a11" for "Public", "Private", and "For-Profit" colleges, respectively
+pal <- colorFactor(palette = c("red", "blue", '#9b4a11'), 
+                   levels = c("Public", "Private", "For-Profit"))
+
+# Add circle markers that color colleges using pal() and the values of sector_label
+map2 <- 
+    map %>% 
+        addCircleMarkers(data = ca, radius = 2, 
+                         color = ~pal(sector_label), 
+                         label = ~paste0(name, " (", sector_label, ")"))
+
+# Print map2
+map2
+```
+
+### A Legendary Map
+Adding information to our map using color is great, but it is only helpful if we remember what the colors represent. With addLegend() we can add a legend to remind us.
+
+There are several arguments we can use to custom the legend to our liking, including opacity, title, and position. To create a legend for our colorNumeric() example, we would do the following.
+
+```{r}
+# Add a legend that displays the colors used in pal
+m %>% 
+    addLegend(pal = pal, 
+              values = c("Public", "Private", "For-Profit"))
+
+# Customize the legend
+m %>% 
+    addLegend(pal = pal, 
+              values = c("Public", "Private", "For-Profit"),
+              # opacity of .5, title of Sector, and position of topright
+              opacity = 0.5, title = "Sector", position = "topright")
+```
 
 ## Groups, Layers, and Extras
-### 
+### Middle America
+Starting from scratch, our first step is to create a base map and to set our map's view. Rather than using the geocode() function from ggmaps, we'll add an extra feature to our map so we can use the map to geocode.
+
+```{r}
+library(leaflet.extras)
+
+leaflet() %>%
+  addTiles() %>% 
+  addSearchOSM() %>% 
+  addReverseSearchOSM() 
+```
+
+### Building a Base
+Now that we know where to center our map (Lat = 39.8282, Lng = -98.5795), let's build a new basemap. Remember that we can use either addTiles() or addProviderTiles() to add a map tile to our leaflet object.
+
+Since we are working toward mapping all of America's colleges, we can include the ipeds data at the start of the chain of functions that will create our base map. This way the ipeds data will be stored with our base map so that we can easily access it. Once we have built a solid base, we can map every college in America with just two lines of R code.
+
+```{r}
+m2 <- 
+    ipeds %>% 
+        leaflet() %>% 
+            # use the CartoDB provider tile
+            addProviderTiles("CartoDB") %>% 
+            # center on the middle of the US with zoom of 3
+            setView(lat = 39.8282, lng = -98.5795, zoom = 3)
+
+# Map all American colleges 
+m2 %>% 
+    addCircleMarkers()
+```
+
+### Mapping Public Colleges
+We can add each sector to our map as a layer providing users with the ability to select which sectors are displayed. To do this we will make use of a new argument to the addCircleMarkers() function, called a group.
+
+```{r}
+# Load the htmltools package
+library(htmltools)
+
+# Create data frame called public with only public colleges
+public <- filter(ipeds, sector_label == "Public")  
+
+# Create a leaflet map of public colleges called m3 
+m3 <- leaflet() %>% 
+        addProviderTiles("CartoDB") %>% 
+        addCircleMarkers(data = public, radius = 2, label = ~htmlEscape(name),
+                         color = ~pal(sector_label), group = "Public")
+
+m3
+```
+
+### Mapping Public and Private Colleges
+We can add private colleges exactly how we added public colleges. Then using the addLayersControl() function with the overlayGroups argument we can give our users the ability to display public and/or private colleges. The overlayGroups argument takes a vector of groups that we have defined while creating our layers (i.e., public and private).
+
+```{r}
+# Create data frame called private with only private colleges
+private <- filter(ipeds, sector_label == "Private")  
+
+# Add private colleges to `m3` as a new layer
+m3 <- m3 %>% 
+        addCircleMarkers(data = private, radius = 2, label = ~htmlEscape(name),
+                         color = ~pal(sector_label), group = "Private") %>% 
+        addLayersControl(overlayGroups = c("Public", "Private"))
+
+m3
+```
+
+### Mapping All Colleges
+Let's keep layering up and add for-profit colleges to our leaflet map that is stored in the m3 object.
+
+After you print() the m3 map with public, private, and for-profit colleges as their own layers, then try removing all three layers and adding them back to the map in a different order.
+
+The different college sectors are added back to the map as layers in the order you specify (i.e., the last sector that you select will be on top).
+
+```{r}
+# Create data frame called profit with only for-profit colleges
+profit <- filter(ipeds, sector_label == "For-Profit")  
+
+# Add for-profit colleges to `m3` as a new layer
+m3 <- m3 %>% 
+        addCircleMarkers(data = profit, radius = 2, label = ~htmlEscape(name),
+                         color = ~pal(sector_label),   group = "For-Profit")  %>% 
+        addLayersControl(overlayGroups = c("Public", "Private", "For-Profit"))  
+
+# Center the map on the middle of the US with a zoom of 4
+m4 <- m3 %>%
+        setView(lat = 39.8282, lng = -98.5795, zoom = 4) 
+        
+m4
+``` 
+
+### Change up the Base
+Similar to how we added overlay groups (i.e., college sectors), we can allow our users to toggle between different base maps using the baseGroups argument to the addLayersControl() function.
+
+Try running the above code in the console. You should see a leaflet map in the viewer with the CartoDB basemap. This is because we added the CartoDB base map after the default OpenStreetMap tile. If we add addLayerControl(), our users will be able to toggle between the two base maps (you can include many base maps, but only one can be selected at a time).
+
+```{r}
+leaflet() %>% 
+  # Add the OSM, CartoDB and Esri tiles
+  addTiles(group = "OSM") %>% 
+  addProviderTiles('CartoDB', group = "CartoDB") %>% 
+  addProviderTiles("Esri", group = "Esri") %>% 
+  # Use addLayersControl to allow users to toggle between basemaps
+  addLayersControl(baseGroups = c('OSM', 'CartoDB', 'Esri'))
+```
+
+### Putting it all Together
+Let's try putting this all together at one time. Building our interactive map of every four-year college in America can be broken down into four steps:
+
+- Initialize the web map
+- Lay down our base maps
+- Plot each sector of colleges as its own layer
+- Add layer controls so users can toggle base and overlay groups
+
+```{r}
+m4 <- leaflet() %>% 
+        addTiles(group = "OSM") %>% 
+        addProviderTiles("CartoDB", group = "Carto") %>% 
+        addProviderTiles("Esri", group = "Esri") %>% 
+        addCircleMarkers(data = public, radius = 2, label = ~htmlEscape(name),
+                         color = ~pal(sector_label), group = "Public") %>% 
+        addCircleMarkers(data = private, radius = 2, label = ~htmlEscape(name),
+                           color = ~pal(sector_label), group = "Private")  %>% 
+        addCircleMarkers(data = profit, radius = 2, label = ~htmlEscape(name),
+                         color = ~pal(sector_label), group = "For-Profit")  %>% 
+        addLayersControl(baseGroups = c("OSM", "Carto", "Esri"), 
+                         overlayGroups = c("Public", "Private", "For-Profit")) %>% 
+        setView(lat = 39.8282, lng = -98.5795, zoom = 4) 
+
+m4
+```
+
+### Adding a Piece of Flair
+Earlier in this chapter, we used addSearchOSM() to find the middle of the US. To search for markers, rather than locations, we can use the addSearchFeatures() function. addSearchFeatures() will add a search box that you can use to find markers in the group(s) passed to the targetGroups argument. For example, to search our map for public colleges we could use the following code.
+
+```{r}
+# Make each sector of colleges searchable 
+m4_search <- m4  %>% 
+        addSearchFeatures(
+            targetGroups = c("Public", "Private", "For-Profit"), 
+            # Set the search zoom level to 18
+            options = searchFeaturesOptions(zoom = 18)) 
+
+# Try searching the map for a college
+m4_search
+```
+
+### A Cluster Approach
+Rather than using layers to improve the usability of our map, we could elect to cluster the colleges by clustering groups of nearby colleges together to reduce the number of points on the map. Zooming in will cause the clusters to break apart and the individual colleges to appear. This can be a useful tactic for mapping a large number of points in a user-friendly manner.
+
+We can cluster all of our colleges by setting the clusterOptions argument of addCircleMarkers() as follows.
+
+```{r}
+ipeds %>% 
+    leaflet() %>% 
+        addTiles() %>% 
+        # Sanitize any html in our labels
+        addCircleMarkers(radius = 2, label = ~htmlEscape(name),
+                         # Color code colleges by sector using the `pal` color palette
+                         color = ~pal(sector_label),
+                         # Cluster all colleges using `clusterOptions`
+                         clusterOptions = markerClusterOptions()) 
+```
 
 ## Plotting Polygons
-### 
+### Introduction to Spatial Data
+We have been mapping points, but there are several spatial features that can be mapped, including polygons. In R, polygons are often stored in a SpatialPolygonsDataFrame that holds the polygon, coordinate information, and a data frame with one row per polygon.
+
+A SpatialPolygonsDataFrame called shp that contains the zip code boundaries for North Carolina has been loaded for you. shp has five slots that store various types of information:
+
+- data: data associated with each polygon
+- polygons: coordinates to plot polygons
+- plotOrder: order in which polygons are plotted
+- bbox: bounding box for geographic data (i.e., a rectangle)
+- proj4string: coordinate reference system
+
+```{r}
+# Print a summary of the `shp` data
+summary(shp)
+
+# Print the class of `shp`
+class(shp)
+
+# Print the slot names of `shp`
+slotNames(shp)
+```
+
+### Exploring Spatial Data
+The data slot in shp holds a data frame like we are used to working with. However, since it is stored inside a SpatialPolygonsDataFrame, we access the data frame a little differently using the @ operator.
+
+```{r}
+# Glimpse the data slot of shp
+glimpse(shp@data)
+
+# Print the class of the data slot of shp
+class(shp@data)
+
+# Print GEOID10
+shp@data$GEOID10
+``` 
+
+### Joining Spatial Data
+We can join data onto the data frame stored in the data slot of our SpatialPolygonsDataFrame. In this chapter, we are interested in the mean income at the zip code level as reported by the IRS. Once we have the income data joined onto the information in the data slot of shp we can map the mean income of zip codes on our leaflet map.
+
+A data frame called nc_income has been loaded for you. Let's get started by taking a look at the nc_income data. Then we'll join it onto the information in the data slot of shp and see if there are any zip codes in our data that are missing income information.
+
+```{r}
+# Glimpse the nc_income data
+glimpse(nc_income)
+
+# Summarize the nc_income data
+summary(nc_income)
+
+# Left join nc_income onto shp@data and store in shp_nc_income
+shp_nc_income <- shp@data %>% 
+                left_join(nc_income, by = c("GEOID10" = "zipcode"))
+
+# Print the number of missing values of each variable in shp_nc_income
+shp_nc_income  %>%
+  summarize_all(funs(sum(is.na(.))))
+```
+
+### addPolygons() Function
+Let's look at those zip codes with missing data to hypothesize why they do not have income data.
+
+We are mapping ZCTAs (not actual zip codes) so not every part of NC will have a boundary. Our boundaries may overlap because the file was simplified to reduce size. These are trade offs to consider when mapping polygons.
+
+```{r}
+# map the polygons in shp
+shp %>% 
+    leaflet() %>% 
+    addTiles() %>% 
+    addPolygons()
+
+# which zips were not in the income data?
+shp_na <- shp[is.na(shp$mean_income),]
+
+# map the polygons in shp_na
+shp_na %>% 
+    leaflet() %>% 
+    addTiles() %>% 
+    addPolygons()
+```
+
+### NC High Income Zips
+Did you have a hypothesis of why certain zip codes are missing income information? It looks to me like many of them are areas that likely have low populations (e.g., parks, colleges, etc.) and the IRS only reports income data on zip codes with more than 100 filers.
+
+Now let's focus in on a subset of zip codes with income data, namely the 25% of zip codes in NC with the highest mean incomes. Where do think these will fall within the states?
+
+```{r}
+# summarize the mean income variable
+summary(shp$mean_income)
+
+# subset shp to include only zip codes in the top quartile of mean income
+high_inc <- shp[!is.na(shp$mean_income) & shp$mean_income > 55917,]
+
+# map the boundaries of the zip codes in the top quartile of mean income
+high_inc %>%
+  leaflet() %>%
+  addTiles() %>%
+  addPolygons()
+```
+
+### addPolygon() Options
+So far we have used the default appearance for addPolygons(). There are several more ways to customize the polygons.
+
+The arguments to addPolygons() we will focus on are:
+
+- weight: the thickness of the boundary lines in pixels
+- color: the color of the polygons
+- label: the information to appear on hover
+- highlightOptions: options to highlight a polygon on hover
+
+```{r}
+# create color palette with colorNumeric()
+nc_pal <- colorNumeric("YlGn", domain = high_inc@data$mean_income)
+
+high_inc %>%
+  leaflet() %>%
+  addTiles() %>%
+  # set boundary thickness to 1 and color polygons
+  addPolygons(weight = 1, color = ~nc_pal(mean_income),
+              # add labels that display mean income
+              label = ~paste0("Mean Income: ", dollar(mean_income)),
+              # highlight polygons on hover
+              highlightOptions = highlightOptions(weight = 5, color = "white",
+              bringToFront = TRUE))
+```
+
+### Let's do some Logging
+The range is nearly $500,000! However, the median is much closer to the min than to the max, indicating a right-skew. Since the mean income variable contains exceptionally large values, the continuous color gradient is not very helpful. Log transforming a right-skewed variable pulls large values closer to the mean and yields a more symmetrically distributed variable.
+
+Log transforming the mean income on our map increases the variation in the color gradient across the high income zip codes and enables better visualization of the distribution of mean income across the state.
+
+```{r}
+# Create a logged version of the nc_pal color palette
+nc_pal <- colorNumeric("YlGn", domain = log(high_inc@data$mean_income))
+
+# apply the nc_pal
+high_inc %>%
+  leaflet() %>%
+  #addProviderTiles("CartoDB") %>%
+  addPolygons(weight = 1, color = ~nc_pal(log(mean_income)), fillOpacity = 1,
+              label = ~paste0("Mean Income: ", dollar(mean_income)),
+              highlightOptions = highlightOptions(weight = 5, color = "white", bringToFront = TRUE))
+```
+
+### Wealthiest Zip Codes in America
+Zooming out from North Carolina, let's put together a polygon layer for the entire country. Then we will work to add this layer to our map of American colleges.
+
+According to the 2015 IRS data, there are 427 zip codes in America with a mean income of $200,000 or more. It might be interesting to know which colleges are located in these affluent areas. Let's map these 427 polygons and explore our leaflet map to better understand where the highest income zip codes in America are. To get us started, a SpatialPolygonsDataFrame called wealthy_zip that contains information on each zip code in America with a mean income of $200,000 or more has been loaded for you.
+
+```{r}
+# Print the slot names of `wealthy_zips`
+slotNames(wealthy_zips)
+
+# Print a summary of the `mean_income` variable
+summary(wealthy_zips@data$mean_income)
+
+# plot zip codes with mean incomes >= $200k
+wealthy_zips %>% 
+  leaflet() %>% 
+  addProviderTiles("CartoDB") %>% 
+  # set color to green and create Wealth Zipcodes group
+  addPolygons(weight = 1, fillOpacity = .7, color = "green",  group = "Wealthy Zipcodes", 
+              label = ~paste0("Mean Income: ", dollar(mean_income)),
+              highlightOptions = highlightOptions(weight = 5, color = "white", bringToFront = TRUE))
+```
+
+### Final Map
+Because our leaflet map is built in layers, we can add different types of information to the same base map (e.g., points and polygons). When adding new layers based on different data to an existing leaflet object we must specify the data argument with the function that creates the new layer to override the data that is piped through the chain of functions.
+
+Let's combine our point and polygon maps to add a layer highlighting America's wealthiest zip codes to our map of every college in America. To get us started, the last layered version of the college map m4 has been printed for you and the wealthy_zips SpatialPolygonsDataFrame is pre-loaded.
+
+```{r}
+# Add polygons using wealthy_zips
+final_map <- m4 %>% 
+   addPolygons(data = wealthy_zips, weight = 1, fillOpacity = .5, color = "Grey",  group = "Wealthy Zip Codes", 
+              label = ~paste0("Mean Income: ", dollar(mean_income)),
+              highlightOptions = highlightOptions(weight = 5, color = "white", bringToFront = TRUE)) %>% 
+    # Update layer controls including "Wealthy Zip Codes"
+    addLayersControl(baseGroups = c("OSM", "Carto", "Esri"), 
+                         overlayGroups = c("Public", "Private", "For-Profit", "Wealthy Zip Codes"))     
+
+final_map
+```
